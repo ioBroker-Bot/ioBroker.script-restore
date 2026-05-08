@@ -75,6 +75,9 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+- (copilot) Adapter requires node.js >= 22 now
+
 ### 0.0.12 (2026-04-30)
 * (ipod86) add common.singleton to prevent multiple instances
 * (ipod86) complete i18n translations for all supported languages (fr, es, it, nl, pl, pt, ru, uk, zh-cn)
