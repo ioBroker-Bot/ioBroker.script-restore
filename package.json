@@ -22,7 +22,7 @@
     "url": "https://github.com/ipod86/ioBroker.script-restore.git"
   },
   "engines": {
-    "node": ">= 20"
+    "node": ">= 22"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.3.2",
