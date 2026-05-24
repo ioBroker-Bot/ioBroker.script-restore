@@ -1146,34 +1146,6 @@
 			},
 		};
 
-		function detectLang() {
-			// 1. URL parameter
-			const lp = urlParams.get('lang') || urlParams.get('language');
-			if (lp) return { lang: normLang(lp), confident: true };
-			// 2. <html lang="de"> des Parent-Frames (ioBroker Admin setzt das zuverlässig)
-			try {
-				const hl = window.parent.document.documentElement.lang;
-				if (hl && hl.length >= 2) return { lang: normLang(hl), confident: true };
-			} catch(e) {}
-			// 3. localStorage (verschiedene Admin-Versionen)
-			try {
-				for (const k of ['App.language', 'ioBroker.locale', 'lang', 'language']) {
-					const v = localStorage.getItem(k);
-					if (v && v.length >= 2) return { lang: normLang(v), confident: true };
-				}
-			} catch(e) {}
-			// 4. Parent frame Variablen (Admin v5/v6/v7)
-			try {
-				const p = window.parent;
-				if (p.sysLang) return { lang: normLang(p.sysLang), confident: true };
-				if (p.systemLang) return { lang: normLang(p.systemLang), confident: true };
-				if (p.main && p.main.language) return { lang: normLang(p.main.language), confident: true };
-				if (p.app && p.app.language) return { lang: normLang(p.app.language), confident: true };
-			} catch(e) {}
-			// 5. Browser-Sprache (least reliable — socket may override)
-			return { lang: normLang(navigator.language || 'en'), confident: false };
-		}
-
 		function normLang(l) {
 			if (!l) return 'en';
 			const ll = l.toLowerCase().replace('_', '-');
@@ -1181,46 +1153,16 @@
 			return ll.slice(0, 2);
 		}
 
-		let LANG_CONFIDENT = false;
+		// Initial guess from URL param or browser language — replaced by adapter response in loadSourceConfig
 		let LANG = (function() {
-			const { lang, confident } = detectLang();
-			const resolved = TRANSLATIONS[lang] ? lang : 'en';
-			LANG_CONFIDENT = confident && !!TRANSLATIONS[lang];
-			return resolved;
+			const lp = urlParams.get('lang') || urlParams.get('language');
+			if (lp) { const l = normLang(lp); if (TRANSLATIONS[l]) return l; }
+			const bl = normLang(navigator.language || 'en');
+			return TRANSLATIONS[bl] ? bl : 'en';
 		})();
 
 		function t(key) {
 			return (TRANSLATIONS[LANG] && TRANSLATIONS[LANG][key]) || (TRANSLATIONS.en && TRANSLATIONS.en[key]) || key;
-		}
-
-		function applyLangFromSocket() {
-			// Skip: a reliable sync source (parent html, localStorage, URL) already resolved the language.
-			// Applying the socket result on top would cause a visible flash.
-			if (LANG_CONFIDENT) return;
-			if (!socket) return;
-			const apply = function(lang) {
-				if (!lang) return;
-				const l = normLang(lang);
-				if (TRANSLATIONS[l] && l !== LANG) {
-					LANG = l;
-					applyTranslations();
-				}
-			};
-			try {
-				if (typeof socket.getSystemConfig === 'function') {
-					Promise.resolve(socket.getSystemConfig()).then(function(cfg) {
-						if (cfg && cfg.common) apply(cfg.common.language);
-					}).catch(function() {});
-				} else if (typeof socket.getObject === 'function') {
-					Promise.resolve(socket.getObject('system.config')).then(function(obj) {
-						if (obj && obj.common) apply(obj.common.language);
-					}).catch(function() {});
-				} else if (typeof socket.emit === 'function') {
-					socket.emit('getObject', 'system.config', function(err, obj) {
-						if (!err && obj && obj.common) apply(obj.common.language);
-					});
-				}
-			} catch(e) {}
 		}
 
 		function applyTranslations() {
@@ -1371,8 +1313,6 @@
 		}
 
 		initSocket();
-		applyLangFromSocket();
-		setTimeout(applyLangFromSocket, 800);
 
 		// === Resizer ===
 		const resizerEl = document.getElementById('resizer');
@@ -1595,6 +1535,10 @@
 				if (!result || result.error) {
 					if (attempt < 10) setTimeout(function() { loadSourceConfig(attempt + 1); }, 500);
 					return;
+				}
+				if (result.language) {
+					const l = normLang(result.language);
+					if (TRANSLATIONS[l] && l !== LANG) { LANG = l; applyTranslations(); }
 				}
 				if (result.localEnabled === false) document.getElementById('localDropdown').style.display = 'none';
 				if (result.ftpEnabled) document.getElementById('ftpDropdown').style.display = '';

@@ -65,7 +65,17 @@ class ScriptRestore extends utils.Adapter {
 				case "parseUploadedFile":
 					await this.handleParseUploadedFile(obj);
 					break;
-				case "getSourceConfig":
+				case "getSourceConfig": {
+					let language = "en";
+					try {
+						const sysCfg = await this.getForeignObjectAsync("system.config");
+						const lang = (sysCfg?.common as unknown as Record<string, unknown>)?.language;
+						if (typeof lang === "string" && lang) {
+							language = lang;
+						}
+					} catch {
+						// ignore
+					}
 					this.sendTo(
 						obj.from,
 						obj.command,
@@ -76,10 +86,12 @@ class ScriptRestore extends utils.Adapter {
 							httpEnabled: !!this.config.httpEnabled,
 							sftpEnabled: !!this.config.sftpEnabled,
 							webdavEnabled: !!this.config.webdavEnabled,
+							language,
 						},
 						obj.callback,
 					);
 					break;
+				}
 				case "suggestBackupPath":
 					await this.handleSuggestBackupPath(obj);
 					break;

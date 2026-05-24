@@ -51,6 +51,7 @@ class ScriptRestore extends utils.Adapter {
     callback();
   }
   async onMessage(obj) {
+    var _a;
     if (!obj.callback) {
       return;
     }
@@ -65,7 +66,16 @@ class ScriptRestore extends utils.Adapter {
         case "parseUploadedFile":
           await this.handleParseUploadedFile(obj);
           break;
-        case "getSourceConfig":
+        case "getSourceConfig": {
+          let language = "en";
+          try {
+            const sysCfg = await this.getForeignObjectAsync("system.config");
+            const lang = (_a = sysCfg == null ? void 0 : sysCfg.common) == null ? void 0 : _a.language;
+            if (typeof lang === "string" && lang) {
+              language = lang;
+            }
+          } catch {
+          }
           this.sendTo(
             obj.from,
             obj.command,
@@ -75,11 +85,13 @@ class ScriptRestore extends utils.Adapter {
               smbEnabled: !!this.config.smbEnabled,
               httpEnabled: !!this.config.httpEnabled,
               sftpEnabled: !!this.config.sftpEnabled,
-              webdavEnabled: !!this.config.webdavEnabled
+              webdavEnabled: !!this.config.webdavEnabled,
+              language
             },
             obj.callback
           );
           break;
+        }
         case "suggestBackupPath":
           await this.handleSuggestBackupPath(obj);
           break;
