@@ -125,6 +125,9 @@ class ScriptRestore extends utils.Adapter {
         case "restoreScript":
           await this.handleRestoreScript(obj);
           break;
+        case "enableScript":
+          await this.handleEnableScript(obj);
+          break;
         default:
           this.sendTo(obj.from, obj.command, { error: "Unknown command" }, obj.callback);
       }
@@ -728,6 +731,16 @@ class ScriptRestore extends utils.Adapter {
       });
       this.log.info(`Script restored: ${newId}`);
       this.sendTo(obj.from, obj.command, { success: true, id: newId }, obj.callback);
+    } catch (e) {
+      this.sendTo(obj.from, obj.command, { error: e.message }, obj.callback);
+    }
+  }
+  async handleEnableScript(obj) {
+    const msg = obj.message;
+    try {
+      await this.extendForeignObjectAsync(msg.id, { common: { enabled: true } });
+      this.log.info(`Script enabled: ${msg.id}`);
+      this.sendTo(obj.from, obj.command, { success: true }, obj.callback);
     } catch (e) {
       this.sendTo(obj.from, obj.command, { error: e.message }, obj.callback);
     }

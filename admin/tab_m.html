@@ -368,6 +368,14 @@
 		body.dark .restore-modal-warning { background: #2d1f00; border-color: #7a5f00; }
 		body.dark .restore-modal-warning p { color: #ffd966; }
 		body.dark .restore-modal-warning code { background: rgba(255,255,255,0.1); color: #ffb347; }
+		.restore-modal-success {
+			background: #d1e7dd; border: 1px solid #a3cfbb; border-radius: 6px;
+			padding: 12px 14px; margin-top: 14px; display: none;
+		}
+		.restore-modal-success p { margin: 0 0 10px; font-size: 0.88rem; color: #0a3622; line-height: 1.5; }
+		.restore-modal-success .rmw-actions { display: flex; gap: 8px; justify-content: flex-end; }
+		body.dark .restore-modal-success { background: #0d2b1f; border-color: #1a5c38; }
+		body.dark .restore-modal-success p { color: #6fdc9e; }
 
 		/* Responsive */
 		@media (max-width: 768px) {
@@ -405,6 +413,13 @@
 				<div class="rmw-actions">
 					<button class="btn btn-outline" onclick="dismissWarning()">Anderen Suffix wählen</button>
 					<button class="btn btn-danger" onclick="overwriteConfirmed()">Überschreiben</button>
+				</div>
+			</div>
+			<div class="restore-modal-success" id="rmSuccess">
+				<p>✓ Erfolgreich wiederhergestellt.<br>Soll das Skript jetzt gestartet werden?</p>
+				<div class="rmw-actions">
+					<button class="btn btn-outline" onclick="closeRestoreModal()">Nein danke</button>
+					<button class="btn btn-outline-success" id="rmStartBtn" onclick="startRestoredScript()">Jetzt starten</button>
 				</div>
 			</div>
 			<div class="restore-modal-footer">
@@ -1264,6 +1279,8 @@
 		}
 
 		// === Restore Modal ===
+		let _restoredScriptId = null;
+
 		function openRestoreModal() {
 			if (cur.index < 0) return;
 			const s = scriptsData[cur.index];
@@ -1275,7 +1292,9 @@
 			document.getElementById('rmMsg').textContent = '';
 			document.getElementById('rmMsg').style.color = '';
 			document.getElementById('rmWarning').style.display = 'none';
+			document.getElementById('rmSuccess').style.display = 'none';
 			document.getElementById('rmConfirmBtn').disabled = false;
+			_restoredScriptId = null;
 			updateRestorePreview();
 			document.getElementById('restoreModalOverlay').classList.add('open');
 			setTimeout(() => document.getElementById('rmSuffix').focus(), 50);
@@ -1284,7 +1303,9 @@
 		function closeRestoreModal(e) {
 			if (e && e.target !== document.getElementById('restoreModalOverlay')) return;
 			document.getElementById('rmWarning').style.display = 'none';
+			document.getElementById('rmSuccess').style.display = 'none';
 			document.getElementById('rmSuffix').disabled = false;
+			_restoredScriptId = null;
 			document.getElementById('restoreModalOverlay').classList.remove('open');
 		}
 
@@ -1317,9 +1338,10 @@
 					msgEl.style.color = '#dc3545';
 					msgEl.textContent = '✗ ' + result.error;
 				} else if (result && result.success) {
-					msgEl.style.color = '#198754';
-					msgEl.textContent = '✓ Geladen!';
-					setTimeout(() => closeRestoreModal(), 1200);
+					_restoredScriptId = result.id;
+					msgEl.textContent = '';
+					document.getElementById('rmSuffix').disabled = true;
+					document.getElementById('rmSuccess').style.display = 'block';
 				} else {
 					confirmBtn.disabled = false;
 					msgEl.style.color = '#dc3545';
@@ -1339,6 +1361,25 @@
 			document.getElementById('rmWarning').style.display = 'none';
 			document.getElementById('rmSuffix').disabled = false;
 			confirmRestoreScript(true);
+		}
+
+		function startRestoredScript() {
+			if (!_restoredScriptId) return;
+			const startBtn = document.getElementById('rmStartBtn');
+			startBtn.disabled = true;
+			startBtn.textContent = '⏳ Starte...';
+			sendTo('enableScript', { id: _restoredScriptId }, function(result) {
+				if (result && result.success) {
+					startBtn.textContent = '✓ Gestartet';
+					setTimeout(() => closeRestoreModal(), 1000);
+				} else {
+					startBtn.disabled = false;
+					startBtn.textContent = 'Jetzt starten';
+					const p = document.querySelector('#rmSuccess p');
+					p.innerHTML = '✗ Fehler: ' + ((result && result.error) || 'Unbekannt');
+					p.style.color = '#dc3545';
+				}
+			});
 		}
 	</script>
 </body>

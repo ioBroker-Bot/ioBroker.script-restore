@@ -125,6 +125,9 @@ class ScriptRestore extends utils.Adapter {
 				case "restoreScript":
 					await this.handleRestoreScript(obj);
 					break;
+				case "enableScript":
+					await this.handleEnableScript(obj);
+					break;
 				default:
 					this.sendTo(obj.from, obj.command, { error: "Unknown command" }, obj.callback);
 			}
@@ -832,6 +835,17 @@ class ScriptRestore extends utils.Adapter {
 			});
 			this.log.info(`Script restored: ${newId}`);
 			this.sendTo(obj.from, obj.command, { success: true, id: newId }, obj.callback);
+		} catch (e) {
+			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
+		}
+	}
+
+	private async handleEnableScript(obj: ioBroker.Message): Promise<void> {
+		const msg = obj.message as { id: string };
+		try {
+			await this.extendForeignObjectAsync(msg.id, { common: { enabled: true } as ioBroker.ScriptCommon });
+			this.log.info(`Script enabled: ${msg.id}`);
+			this.sendTo(obj.from, obj.command, { success: true }, obj.callback);
 		} catch (e) {
 			this.sendTo(obj.from, obj.command, { error: (e as Error).message }, obj.callback);
 		}
