@@ -2,6 +2,12 @@
 
 ### 0.0.1 (2026-04-06)
 * (ipod86) initial release
+## 0.0.9 (2026-04-08)
+* (ipod86) fix jsonConfig: add responsive size attributes (E5507)
+* (ipod86) add i18n translation files (W5022)
+* (ipod86) remove outdated index_m.html and style.css (W5047)
+* (ipod86) remove invalid copyToField attribute (W5512)
+
 ## 0.0.8 (2026-04-08)
 * (ipod86) migrate settings UI to jsonConfig (admin 5+) — fixes S5022
 * (ipod86) fix: use `node:fs` instead of `fs` — fixes S5043

@@ -78,6 +78,11 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 	### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+* (ipod86) Überschreiben bestehender Skripte beim Restore erlaubt (Bestätigungs-Dialog mit Pfadanzeige)
+* (ipod86) Leeres Suffix erlaubt, um Skript unter dem Originalnamen wiederherzustellen
+* (ipod86) Hinweis nach erfolgreichem Restore: Skript direkt starten?
+
+### 0.1.0 (2026-05-13)
 * (ipod86) Node.js 20-Unterstützung eingestellt (EOL 2026-04-30), mindestens Node.js 22 erforderlich
 * (ipod86) Fix: @iobroker/types in production dependencies verschoben (CI-Integrationstests)
 * (ipod86) .npmrc mit legacy-peer-deps hinzugefügt (Peer-Dependency-Konflikte)

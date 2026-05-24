@@ -75,6 +75,11 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 0.1.1 (2026-05-24)
+* (ipod86) allow overwriting existing scripts during restore (confirmation dialog with path display)
+* (ipod86) allow empty suffix to restore script under its original name
+* (ipod86) prompt to start script immediately after successful restore
+
 ### 0.1.0 (2026-05-13)
 * (ipod86) drop Node.js 20 support (EOL 2026-04-30), require >= 22
 * (ipod86) fix: move @iobroker/types to production dependencies to fix CI integration test
@@ -94,12 +99,6 @@ The archive is parsed entirely in the browser — no files are written to disk d
 * (ipod86) fix jsonConfig responsive sizes lg/xl for backupPath (E5509)
 * (ipod86) trim news entries to 7 (W1032)
 * (ipod86) add Dependabot npm cooldown of 7 days (W8915)
-
-### 0.0.9 (2026-04-08)
-* (ipod86) fix jsonConfig: add responsive size attributes (E5507)
-* (ipod86) add i18n translation files (W5022)
-* (ipod86) remove outdated index_m.html and style.css (W5047)
-* (ipod86) remove invalid copyToField attribute (W5512)
 
 ## License
 MIT License

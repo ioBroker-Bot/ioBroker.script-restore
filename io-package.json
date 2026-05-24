@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "news": {
+      "0.1.1": {
+        "en": "allow overwriting existing scripts during restore (confirmation dialog with path display)\nallow empty suffix to restore script under its original name\nprompt to start script immediately after successful restore",
+        "de": "das überschreiben bestehender skripte während der wiederherstellung (bestätigungsdialog mit pfadanzeige)\nleere suffix erlauben, skript unter seinem ursprünglichen namen wiederherzustellen\nscript sofort nach erfolgreicher wiederherstellung starten",
+        "ru": "позволяет перезаписывать существующие скрипты во время восстановления (подтверждающий диалог с отображением пути)\nпустой суффикс позволяет восстановить скрипт под оригинальным названием\nсценарий сразу после успешного восстановления",
+        "pt": "permitir sobrescrever scripts existentes durante a restauração (diálogo de confirmação com exibição de caminho)\npermite que o sufixo vazio restaure o script sob o seu nome original\nprompt para iniciar o script imediatamente após a restauração bem- sucedida",
+        "nl": "laat bestaande scripts overschrijven tijdens het herstellen (bevestigingsdialoog met padweergave)\nlaat leeg achtervoegsel toe om script te herstellen onder de oorspronkelijke naam\nprompt om het script direct na succesvol herstel te starten",
+        "fr": "permettre d'écraser les scripts existants pendant la restauration (dialogue de confirmation avec affichage du chemin)\npermettre au suffixe vide de restaurer le script sous son nom d'origine\ninvite à démarrer le script immédiatement après la restauration réussie",
+        "it": "consentire la sovrascrittura degli script esistenti durante il ripristino (conferma finestra di dialogo con il display del percorso)\nconsentire il suffisso vuoto per ripristinare lo script sotto il suo nome originale\nprompt per avviare lo script immediatamente dopo il ripristino di successo",
+        "es": "permite sobreescribir scripts existentes durante la restauración ( diálogo de confirmación con pantalla de ruta)\npermitir sufijo vacío para restaurar script bajo su nombre original\nprompt para iniciar script inmediatamente después de la restauración exitosa",
+        "pl": "pozwala na nadpisanie istniejących skryptów podczas przywracania (okno potwierdzenia z wyświetlaczem ścieżki)\npozwala pustym przyrostkiem przywrócić skrypt pod pierwotną nazwą\nnaciśnij przycisk, aby rozpocząć skrypt natychmiast po pomyślnym przywróceniu",
+        "uk": "дозволити перезаписувати існуючі сценарії під час відновлення (підтвердження діалогу з відображенням шляху)\nдозволити порожній suffix для відновлення сценарію під його оригінальною назвою\nнегайно після успішного відновлення",
+        "zh-cn": "允许在恢复时覆盖已有脚本( 用路径显示确认对话框)\n允许空后缀以原名恢复脚本\n成功恢复后立即启动脚本"
+      },
       "0.1.0": {
         "en": "drop Node.js 20 support (EOL 2026-04-30), require >= 22\nfix: move @iobroker/types to production dependencies to fix CI integration test\nadd .npmrc with legacy-peer-deps to resolve peer dependency conflicts\nupdate dependencies: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
         "de": "drop Node.js 20 Unterstützung (EOL 2026-04-30), benötigen >= 22\nfix: bewegen @iobroker/Typen zu Produktionsabhängigkeiten, um CI Integration Test zu beheben\nhinzufügen .npmrc mit legacy-peer-deps, um peer abhängigkeitskonflikte zu lösen\nupdate abhängigkeiten: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config",
@@ -80,19 +93,6 @@
         "pl": "Migracja UI ustawień do jsonConfig (admin 5+); poprawka importu node:fs; aktualizacja Dependabot; migracja workflow automerge",
         "uk": "Міграція UI налаштувань на jsonConfig (admin 5+); виправлено імпорт node:fs; оновлено Dependabot; міграція automerge workflow",
         "zh-cn": "将设置 UI 迁移至 jsonConfig（admin 5+）；修复 node:fs 导入；更新 Dependabot 计划；迁移 automerge 工作流"
-      },
-      "0.0.7": {
-        "en": "Fix HTTP URL loading without protocol prefix; remove localStorage backup persistence",
-        "de": "HTTP-URL-Laden ohne Protokoll-Präfix behoben; localStorage-Backup-Persistenz entfernt",
-        "ru": "Исправлена загрузка HTTP URL без префикса протокола; удалено сохранение резервной копии в localStorage",
-        "pt": "Corrigido carregamento de URL HTTP sem prefixo de protocolo; removida persistência de backup em localStorage",
-        "nl": "HTTP URL laden zonder protocolprefix opgelost; localStorage backup persistentie verwijderd",
-        "fr": "Correction du chargement d'URL HTTP sans préfixe de protocole; suppression de la persistance de sauvegarde localStorage",
-        "it": "Corretto caricamento URL HTTP senza prefisso protocollo; rimossa persistenza backup localStorage",
-        "es": "Corregida carga de URL HTTP sin prefijo de protocolo; eliminada persistencia de backup en localStorage",
-        "pl": "Naprawiono ładowanie URL HTTP bez prefiksu protokołu; usunięto trwałość kopii zapasowej localStorage",
-        "uk": "Виправлено завантаження HTTP URL без префіксу протоколу; видалено збереження резервної копії в localStorage",
-        "zh-cn": "修复无协议前缀的 HTTP URL 加载；移除 localStorage 备份持久化"
       }
     },
     "titleLang": {
