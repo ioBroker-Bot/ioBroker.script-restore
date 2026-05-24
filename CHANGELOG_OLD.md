@@ -2,6 +2,11 @@
 
 ### 0.0.1 (2026-04-06)
 * (ipod86) initial release
+## 0.0.10 (2026-04-08)
+* (ipod86) fix jsonConfig responsive sizes lg/xl for backupPath (E5509)
+* (ipod86) trim news entries to 7 (W1032)
+* (ipod86) add Dependabot npm cooldown of 7 days (W8915)
+
 ## 0.0.9 (2026-04-08)
 * (ipod86) fix jsonConfig: add responsive size attributes (E5507)
 * (ipod86) add i18n translation files (W5022)

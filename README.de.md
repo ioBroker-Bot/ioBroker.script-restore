@@ -78,6 +78,9 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 	### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
+* (ipod86) Vollständige i18n im Admin-Tab: alle Strings in de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn übersetzt
+
+### 0.1.1 (2026-05-24)
 * (ipod86) Überschreiben bestehender Skripte beim Restore erlaubt (Bestätigungs-Dialog mit Pfadanzeige)
 * (ipod86) Leeres Suffix erlaubt, um Skript unter dem Originalnamen wiederherzustellen
 * (ipod86) Hinweis nach erfolgreichem Restore: Skript direkt starten?
