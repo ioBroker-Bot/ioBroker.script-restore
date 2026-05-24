@@ -1142,29 +1142,29 @@
 		function detectLang() {
 			// 1. URL parameter
 			const lp = urlParams.get('lang') || urlParams.get('language');
-			if (lp) return normLang(lp);
+			if (lp) return { lang: normLang(lp), confident: true };
 			// 2. <html lang="de"> des Parent-Frames (ioBroker Admin setzt das zuverlässig)
 			try {
 				const hl = window.parent.document.documentElement.lang;
-				if (hl && hl.length >= 2) return normLang(hl);
+				if (hl && hl.length >= 2) return { lang: normLang(hl), confident: true };
 			} catch(e) {}
 			// 3. localStorage (verschiedene Admin-Versionen)
 			try {
 				for (const k of ['App.language', 'ioBroker.locale', 'lang', 'language']) {
 					const v = localStorage.getItem(k);
-					if (v && v.length >= 2) return normLang(v);
+					if (v && v.length >= 2) return { lang: normLang(v), confident: true };
 				}
 			} catch(e) {}
 			// 4. Parent frame Variablen (Admin v5/v6/v7)
 			try {
 				const p = window.parent;
-				if (p.sysLang) return normLang(p.sysLang);
-				if (p.systemLang) return normLang(p.systemLang);
-				if (p.main && p.main.language) return normLang(p.main.language);
-				if (p.app && p.app.language) return normLang(p.app.language);
+				if (p.sysLang) return { lang: normLang(p.sysLang), confident: true };
+				if (p.systemLang) return { lang: normLang(p.systemLang), confident: true };
+				if (p.main && p.main.language) return { lang: normLang(p.main.language), confident: true };
+				if (p.app && p.app.language) return { lang: normLang(p.app.language), confident: true };
 			} catch(e) {}
-			// 5. Browser-Sprache
-			return normLang(navigator.language || 'en');
+			// 5. Browser-Sprache (least reliable — socket may override)
+			return { lang: normLang(navigator.language || 'en'), confident: false };
 		}
 
 		function normLang(l) {
@@ -1174,9 +1174,12 @@
 			return ll.slice(0, 2);
 		}
 
+		let LANG_CONFIDENT = false;
 		let LANG = (function() {
-			const detected = detectLang();
-			return TRANSLATIONS[detected] ? detected : 'en';
+			const { lang, confident } = detectLang();
+			const resolved = TRANSLATIONS[lang] ? lang : 'en';
+			LANG_CONFIDENT = confident && !!TRANSLATIONS[lang];
+			return resolved;
 		})();
 
 		function t(key) {
@@ -1184,6 +1187,9 @@
 		}
 
 		function applyLangFromSocket() {
+			// Skip: a reliable sync source (parent html, localStorage, URL) already resolved the language.
+			// Applying the socket result on top would cause a visible flash.
+			if (LANG_CONFIDENT) return;
 			if (!socket) return;
 			const apply = function(lang) {
 				if (!lang) return;
