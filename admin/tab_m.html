@@ -201,6 +201,13 @@
 			font-size: 14px; flex: 1; text-align: center; padding: 20px;
 		}
 
+		/* Syntax highlighting (dark panel, VS Code palette) */
+		.hl-k    { color: #569cd6; }
+		.hl-s    { color: #ce9178; }
+		.hl-c    { color: #6a9955; }
+		.hl-n    { color: #b5cea8; }
+		.hl-attr { color: #9cdcfe; }
+
 		/* Loader overlay */
 		#loader {
 			position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -1943,14 +1950,118 @@
 			showView(cur.xml ? 'xml' : (cur.rule ? 'rule' : 'src'));
 		}
 
+		// ── Syntax highlighter (pure JS, no external deps) ──────────────────
+		const HL_KW = new Set([
+			'abstract','arguments','as','async','await','break','case','catch','class',
+			'const','continue','debugger','declare','default','delete','do','else','enum',
+			'export','extends','false','finally','for','from','function','get','if',
+			'implements','import','in','instanceof','interface','let','module','namespace',
+			'new','null','of','override','package','private','protected','public',
+			'readonly','return','set','static','super','switch','this','throw','true',
+			'try','type','typeof','undefined','var','void','while','with','yield'
+		]);
+
+		function hlEsc(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+		function hlJS(code) {
+			const out = []; let i = 0; const n = code.length;
+			while (i < n) {
+				const c = code[i];
+				if (c === '`' || c === "'" || c === '"') {
+					let j = i + 1;
+					while (j < n) {
+						if (code[j] === '\\') { j += 2; continue; }
+						if (code[j] === c) { j++; break; }
+						if (c !== '`' && code[j] === '\n') break;
+						j++;
+					}
+					out.push('<span class="hl-s">' + hlEsc(code.slice(i, j)) + '</span>'); i = j; continue;
+				}
+				if (c === '/' && i+1 < n && code[i+1] === '/') {
+					let j = i+2; while (j < n && code[j] !== '\n') j++;
+					out.push('<span class="hl-c">' + hlEsc(code.slice(i, j)) + '</span>'); i = j; continue;
+				}
+				if (c === '/' && i+1 < n && code[i+1] === '*') {
+					let j = i+2; while (j < n-1 && !(code[j]==='*' && code[j+1]==='/')) j++; j += 2;
+					out.push('<span class="hl-c">' + hlEsc(code.slice(i, j)) + '</span>'); i = j; continue;
+				}
+				if (c >= '0' && c <= '9') {
+					let j = i; while (j < n && /[0-9a-fA-FxXbB._n]/.test(code[j])) j++;
+					out.push('<span class="hl-n">' + hlEsc(code.slice(i, j)) + '</span>'); i = j; continue;
+				}
+				if (/[a-zA-Z_$]/.test(c)) {
+					let j = i; while (j < n && /[a-zA-Z0-9_$]/.test(code[j])) j++;
+					const w = code.slice(i, j);
+					out.push(HL_KW.has(w) ? '<span class="hl-k">' + w + '</span>' : hlEsc(w)); i = j; continue;
+				}
+				out.push(hlEsc(c)); i++;
+			}
+			return out.join('');
+		}
+
+		function hlXML(code) {
+			const out = []; let i = 0; const n = code.length;
+			while (i < n) {
+				if (code.startsWith('<!--', i)) {
+					let j = code.indexOf('-->', i+4); j = j < 0 ? n : j+3;
+					out.push('<span class="hl-c">' + hlEsc(code.slice(i, j)) + '</span>'); i = j; continue;
+				}
+				if (code[i] === '<') {
+					let j = i+1; while (j < n && !/[\s>\/]/.test(code[j])) j++;
+					out.push('<span class="hl-k">' + hlEsc(code.slice(i, j)) + '</span>'); i = j;
+					while (i < n && code[i] !== '>') {
+						if (code[i] === '"' || code[i] === "'") {
+							const q = code[i]; let k = i+1;
+							while (k < n && code[k] !== q) k++; if (k < n) k++;
+							out.push('<span class="hl-s">' + hlEsc(code.slice(i, k)) + '</span>'); i = k;
+						} else if (/[a-zA-Z_:]/.test(code[i])) {
+							let k = i; while (k < n && /[a-zA-Z0-9_:\-."]/.test(code[k])) k++;
+							const attr = code.slice(i, k);
+							out.push(code[k]==='=' ? '<span class="hl-attr">' + hlEsc(attr) + '</span>' : hlEsc(attr)); i = k;
+						} else { out.push(code[i] === '/' ? '<span class="hl-k">/</span>' : hlEsc(code[i])); i++; }
+					}
+					if (i < n) { out.push('<span class="hl-k">' + hlEsc(code[i]) + '</span>'); i++; }
+					continue;
+				}
+				let j = i; while (j < n && code[j] !== '<') j++;
+				out.push(hlEsc(code.slice(i, j))); i = j;
+			}
+			return out.join('');
+		}
+
+		function hlJSON(code) {
+			const out = []; let i = 0; const n = code.length;
+			while (i < n) {
+				if (code[i] === '"') {
+					let j = i+1;
+					while (j < n) { if (code[j]==='\\') { j+=2; continue; } if (code[j]==='"') { j++; break; } j++; }
+					out.push('<span class="hl-s">' + hlEsc(code.slice(i, j)) + '</span>'); i = j; continue;
+				}
+				if (code[i]==='-' || (code[i]>='0' && code[i]<='9')) {
+					let j = i+1; while (j < n && /[0-9.eE+\-]/.test(code[j])) j++;
+					out.push('<span class="hl-n">' + hlEsc(code.slice(i, j)) + '</span>'); i = j; continue;
+				}
+				let matched = false;
+				for (const kw of ['true','false','null']) {
+					if (code.startsWith(kw, i) && (i+kw.length >= n || !/[a-z]/.test(code[i+kw.length]))) {
+						out.push('<span class="hl-k">' + kw + '</span>'); i += kw.length; matched = true; break;
+					}
+				}
+				if (!matched) { out.push(hlEsc(code[i])); i++; }
+			}
+			return out.join('');
+		}
+		// ─────────────────────────────────────────────────────────────────────
+
 		function showView(v) {
 			cur.activeView = v;
 			document.querySelectorAll('#viewSwitcher button').forEach(b => b.classList.remove('active'));
 			const btn = document.getElementById('btn-' + v);
 			if (btn) btn.classList.add('active');
 			const txt = cur[v] || '';
+			const hl = v === 'xml' ? hlXML(txt) : v === 'rule' ? hlJSON(txt) : hlJS(txt);
 			document.getElementById('codeContainer').innerHTML =
-				txt.split('\n').map(l => '<span class="code-line">' + (escapeHTML(l) || ' ') + '</span>').join('');
+				hl.split('\n').map(l => '<span class="code-line">' + (l || ' ') + '</span>').join('');
 			const dlBtn = document.getElementById('dlBtn');
 			if (v === 'xml') dlBtn.textContent = 'DL .xml';
 			else if (v === 'rule') dlBtn.textContent = 'DL .json';
