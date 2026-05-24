@@ -1050,6 +1050,10 @@
 					Promise.resolve(socket.getSystemConfig()).then(function(cfg) {
 						if (cfg && cfg.common) apply(cfg.common.language);
 					}).catch(function() {});
+				} else if (typeof socket.getObject === 'function') {
+					Promise.resolve(socket.getObject('system.config')).then(function(obj) {
+						if (obj && obj.common) apply(obj.common.language);
+					}).catch(function() {});
 				} else if (typeof socket.emit === 'function') {
 					socket.emit('getObject', 'system.config', function(err, obj) {
 						if (!err && obj && obj.common) apply(obj.common.language);
@@ -1207,6 +1211,7 @@
 
 		initSocket();
 		applyLangFromSocket();
+		setTimeout(applyLangFromSocket, 800);
 
 		// === Resizer ===
 		const resizerEl = document.getElementById('resizer');
