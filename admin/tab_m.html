@@ -393,39 +393,39 @@
 			<div class="progress-inner"><span id="progressPercent">0%</span></div>
 		</div>
 		<div id="spinnerEl" class="spinner" style="display:none;"></div>
-		<div id="loaderText">Lade Backup...</div>
+		<div id="loaderText" data-i18n="loaderLoading">Lade Backup...</div>
 	</div>
 
 	<!-- Restore Modal -->
 	<div class="restore-modal-overlay" id="restoreModalOverlay" onclick="closeRestoreModal(event)">
 		<div class="restore-modal" onclick="event.stopPropagation()">
-			<h3>In ioBroker laden</h3>
+			<h3 data-i18n="modalTitle">In ioBroker laden</h3>
 			<div class="restore-modal-meta">
-				<div>Skript: <strong id="rmScriptName"></strong></div>
-				<div>Pfad: <strong id="rmScriptPath"></strong></div>
-				<div>Typ: <strong id="rmScriptType"></strong></div>
+				<div><span data-i18n="modalLabelScript">Skript:</span> <strong id="rmScriptName"></strong></div>
+				<div><span data-i18n="modalLabelPath">Pfad:</span> <strong id="rmScriptPath"></strong></div>
+				<div><span data-i18n="modalLabelType">Typ:</span> <strong id="rmScriptType"></strong></div>
 			</div>
-			<label for="rmSuffix">Suffix (wird an den Skriptnamen angehängt)</label>
+			<label for="rmSuffix" data-i18n="modalLabelSuffix">Suffix (wird an den Skriptnamen angehängt)</label>
 			<input type="text" id="rmSuffix" value="_rcvr" oninput="updateRestorePreview();">
 			<div class="restore-modal-preview" id="rmPreview"></div>
 			<div class="restore-modal-warning" id="rmWarning">
-				<p>⚠ Ein Skript unter <code id="rmWarningPath"></code> existiert bereits.<br>Soll es wirklich überschrieben werden?</p>
+				<p></p>
 				<div class="rmw-actions">
-					<button class="btn btn-outline" onclick="dismissWarning()">Anderen Suffix wählen</button>
-					<button class="btn btn-danger" onclick="overwriteConfirmed()">Überschreiben</button>
+					<button class="btn btn-outline" onclick="dismissWarning()" data-i18n="modalDismiss">Anderen Suffix wählen</button>
+					<button class="btn btn-danger" onclick="overwriteConfirmed()" data-i18n="modalOverwrite">Überschreiben</button>
 				</div>
 			</div>
 			<div class="restore-modal-success" id="rmSuccess">
-				<p>✓ Erfolgreich wiederhergestellt.<br>Soll das Skript jetzt gestartet werden?</p>
+				<p data-i18n-html="modalSuccess">✓ Erfolgreich wiederhergestellt.<br>Soll das Skript jetzt gestartet werden?</p>
 				<div class="rmw-actions">
-					<button class="btn btn-outline" onclick="closeRestoreModal()">Nein danke</button>
-					<button class="btn btn-outline-success" id="rmStartBtn" onclick="startRestoredScript()">Jetzt starten</button>
+					<button class="btn btn-outline" onclick="closeRestoreModal()" data-i18n="modalClose">Nein danke</button>
+					<button class="btn btn-outline-success" id="rmStartBtn" onclick="startRestoredScript()" data-i18n="modalStart">Jetzt starten</button>
 				</div>
 			</div>
 			<div class="restore-modal-footer">
 				<span id="rmMsg" style="flex:1;font-size:0.85rem;align-self:center;"></span>
 				<button class="btn btn-outline" onclick="closeRestoreModal()">Schließen</button>
-				<button class="btn btn-outline-success" id="rmConfirmBtn" onclick="confirmRestoreScript(false)">Laden</button>
+				<button class="btn btn-outline-success" id="rmConfirmBtn" onclick="confirmRestoreScript(false)" data-i18n="modalLoad">Laden</button>
 			</div>
 		</div>
 	</div>
@@ -433,56 +433,56 @@
 	<div class="toolbar">
 		<div class="toolbar-left">
 			<label class="file-input-label">
-				📂 Backup hochladen
+				<span data-i18n="uploadLabel">📂 Backup hochladen</span>
 				<input type="file" id="fileInput" accept=".tar,.gz,.tar.gz,.json,.jsonl">
 			</label>
 			<div class="dropdown-wrapper" id="localDropdown">
-				<button class="btn btn-outline" onclick="toggleDropdown('local')">
+				<button class="btn btn-outline" onclick="toggleDropdown('local')" data-i18n="localDropdown">
 					🗂️ Lokale Backups ▾
 				</button>
 				<div class="dropdown-menu" id="localMenu"></div>
 			</div>
 			<div class="dropdown-wrapper" id="ftpDropdown" style="display:none;">
-				<button class="btn btn-outline" onclick="toggleDropdown('ftp')">
+				<button class="btn btn-outline" onclick="toggleDropdown('ftp')" data-i18n="ftpDropdown">
 					🌐 FTP Backups ▾
 				</button>
 				<div class="dropdown-menu" id="ftpMenu"></div>
 			</div>
 			<div class="dropdown-wrapper" id="smbDropdown" style="display:none;">
-				<button class="btn btn-outline" onclick="toggleDropdown('smb')">
+				<button class="btn btn-outline" onclick="toggleDropdown('smb')" data-i18n="smbDropdown">
 					🗄️ SMB Backups ▾
 				</button>
 				<div class="dropdown-menu" id="smbMenu"></div>
 			</div>
 			<div class="dropdown-wrapper" id="sftpDropdown" style="display:none;">
-				<button class="btn btn-outline" onclick="toggleDropdown('sftp')">
+				<button class="btn btn-outline" onclick="toggleDropdown('sftp')" data-i18n="sftpDropdown">
 					🔒 SFTP Backups ▾
 				</button>
 				<div class="dropdown-menu" id="sftpMenu"></div>
 			</div>
 			<div class="dropdown-wrapper" id="webdavDropdown" style="display:none;">
-				<button class="btn btn-outline" onclick="toggleDropdown('webdav')">
+				<button class="btn btn-outline" onclick="toggleDropdown('webdav')" data-i18n="webdavDropdown">
 					☁️ WebDAV Backups ▾
 				</button>
 				<div class="dropdown-menu" id="webdavMenu"></div>
 			</div>
 			<div id="httpInputWrapper" style="display:none; align-items:center; gap:6px;">
 				<input type="text" id="httpUrlInput" placeholder="https://..." style="padding:0.35rem 0.6rem; border:1px solid #ced4da; border-radius:4px; font-size:0.875rem; min-width:260px; font-family:inherit;">
-				<button type="button" class="btn btn-outline" onclick="loadHttpUrl()">🌐 URL laden</button>
+				<button type="button" class="btn btn-outline" onclick="loadHttpUrl()" data-i18n="httpLoadBtn">🌐 URL laden</button>
 			</div>
-			<button id="zipBtn" class="btn btn-outline" onclick="downloadZip()" style="display:none;">📦 ZIP</button>
-			<span class="status-msg" id="statusMsg">Backup laden oder Quelle wählen</span>
+			<button id="zipBtn" class="btn btn-outline" onclick="downloadZip()" style="display:none;" data-i18n="zipBtn">📦 ZIP</button>
+			<span class="status-msg" id="statusMsg" data-i18n="statusDefault">Backup laden oder Quelle wählen</span>
 		</div>
 	</div>
 
 	<div class="main-container">
 		<div class="sidebar" id="sidebar">
 			<div class="sidebar-header">
-				<input type="text" id="q" placeholder="Suche in Namen, Ordner &amp; Code...">
-				<button class="btn-icon" id="expandToggleBtn" onclick="toggleExpandAll()" title="Alle Ordner aufklappen">📂</button>
+				<input type="text" id="q" data-i18n-placeholder="searchPlaceholder" placeholder="Suche in Namen, Ordner &amp; Code...">
+				<button class="btn-icon" id="expandToggleBtn" onclick="toggleExpandAll()" data-i18n-title="expandAll" title="Alle Ordner aufklappen">📂</button>
 			</div>
 			<div class="type-filter-bar">
-				<button class="btn-type active" onclick="setTypeFilter(this, '')">Alle</button>
+				<button class="btn-type active" onclick="setTypeFilter(this, '')" data-i18n="typeAll">Alle</button>
 				<button class="btn-type" onclick="setTypeFilter(this, 'JS')"><span class="type-badge badge-JS">JS</span></button>
 				<button class="btn-type" onclick="setTypeFilter(this, 'TypeScript')"><span class="type-badge badge-TypeScript">TS</span></button>
 				<button class="btn-type" onclick="setTypeFilter(this, 'Blockly')"><span class="type-badge badge-Blockly">Blockly</span></button>
@@ -498,17 +498,16 @@
 				<div class="action-bar-inner">
 					<div class="btn-group" id="viewSwitcher"></div>
 					<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
-						<button onclick="openRestoreModal()" class="btn btn-outline-success" id="restoreBtn">In ioBroker laden</button>
-						<button onclick="copyCode(this)" class="btn btn-outline-light">Code Kopieren</button>
-						<button onclick="downloadActive()" class="btn btn-primary" id="dlBtn">Download</button>
+						<button onclick="openRestoreModal()" class="btn btn-outline-success" id="restoreBtn" data-i18n="restoreBtn">In ioBroker laden</button>
+						<button onclick="copyCode(this)" class="btn btn-outline-light" data-i18n="copyBtnAction">Code Kopieren</button>
+						<button onclick="downloadActive()" class="btn btn-primary" id="dlBtn" data-i18n="downloadBtn">Download</button>
 					</div>
 				</div>
 			</div>
 			<div id="codeContainer" class="code-empty">
 				<div>
 					<strong>ioBroker Script Restore</strong><br><br>
-					Lade ein Backup hoch oder wähle eine lokale Datei,<br>
-					um Skripte anzuzeigen und wiederherzustellen.
+					<span data-i18n-html="welcomeText">Lade ein Backup hoch oder wähle eine lokale Datei,<br>um Skripte anzuzeigen und wiederherzustellen.</span>
 				</div>
 			</div>
 		</div>
@@ -519,6 +518,534 @@
 		const urlParams = new URLSearchParams(window.location.search);
 		const instance = urlParams.get('instance') || '0';
 		const adapterInst = 'script-restore.' + instance;
+
+		// === i18n ===
+		const TRANSLATIONS = {
+			de: {
+				loaderLoading:     'Lade Backup...',
+				loaderProcessing:  'Verarbeite...',
+				modalTitle:        'In ioBroker laden',
+				modalLabelScript:  'Skript:',
+				modalLabelPath:    'Pfad:',
+				modalLabelType:    'Typ:',
+				modalLabelSuffix:  'Suffix (wird an den Skriptnamen angehängt)',
+				modalWarning:      '⚠ Ein Skript unter {path} existiert bereits.<br>Soll es wirklich überschrieben werden?',
+				modalDismiss:      'Anderen Suffix wählen',
+				modalOverwrite:    'Überschreiben',
+				modalSuccess:      '✓ Erfolgreich wiederhergestellt.<br>Soll das Skript jetzt gestartet werden?',
+				modalClose:        'Nein danke',
+				modalStart:        'Jetzt starten',
+				modalLoad:         'Laden',
+				modalLoading:      '⏳ Laden...',
+				modalStarting:     '⏳ Starte...',
+				modalStarted:      '✓ Gestartet',
+				modalLoaded:       '✓ Geladen!',
+				modalUnknownError: '✗ Unbekannter Fehler',
+				modalErrorPrefix:  '✗ Fehler: ',
+				copyBtn:           'Code Kopieren',
+				copyBtnAction:     'Code Kopieren',
+				copied:            '✓ Kopiert!',
+				uploadLabel:       '📂 Backup hochladen',
+				localDropdown:     '🗂️ Lokale Backups ▾',
+				ftpDropdown:       '🌐 FTP Backups ▾',
+				smbDropdown:       '🗄️ SMB Backups ▾',
+				sftpDropdown:      '🔒 SFTP Backups ▾',
+				webdavDropdown:    '☁️ WebDAV Backups ▾',
+				httpLoadBtn:       '🌐 URL laden',
+				zipBtn:            '📦 ZIP',
+				statusDefault:     'Backup laden oder Quelle wählen',
+				searchPlaceholder: 'Suche in Namen, Ordner & Code...',
+				expandAll:         'Alle aufklappen',
+				collapseAll:       'Alle einklappen',
+				typeAll:           'Alle',
+				restoreBtn:        'In ioBroker laden',
+				downloadBtn:       'Download',
+				welcomeText:       'Lade ein Backup hoch oder wähle eine lokale Datei,<br>um Skripte anzuzeigen und wiederherzustellen.',
+				noSocket:          'Kein Socket. Bitte prüfen ob script-restore.{i} läuft.',
+				timeout:           'Timeout: Adapter antwortet nicht. Läuft script-restore.{i}?',
+			},
+			en: {
+				loaderLoading:     'Loading backup...',
+				loaderProcessing:  'Processing...',
+				modalTitle:        'Load into ioBroker',
+				modalLabelScript:  'Script:',
+				modalLabelPath:    'Path:',
+				modalLabelType:    'Type:',
+				modalLabelSuffix:  'Suffix (appended to the script name)',
+				modalWarning:      '⚠ A script at {path} already exists.<br>Do you really want to overwrite it?',
+				modalDismiss:      'Choose different suffix',
+				modalOverwrite:    'Overwrite',
+				modalSuccess:      '✓ Successfully restored.<br>Do you want to start the script now?',
+				modalClose:        'No thanks',
+				modalStart:        'Start now',
+				modalLoad:         'Load',
+				modalLoading:      '⏳ Loading...',
+				modalStarting:     '⏳ Starting...',
+				modalStarted:      '✓ Started',
+				modalLoaded:       '✓ Loaded!',
+				modalUnknownError: '✗ Unknown error',
+				modalErrorPrefix:  '✗ Error: ',
+				copyBtn:           'Copy Code',
+				copyBtnAction:     'Copy Code',
+				copied:            '✓ Copied!',
+				uploadLabel:       '📂 Upload backup',
+				localDropdown:     '🗂️ Local Backups ▾',
+				ftpDropdown:       '🌐 FTP Backups ▾',
+				smbDropdown:       '🗄️ SMB Backups ▾',
+				sftpDropdown:      '🔒 SFTP Backups ▾',
+				webdavDropdown:    '☁️ WebDAV Backups ▾',
+				httpLoadBtn:       '🌐 Load URL',
+				zipBtn:            '📦 ZIP',
+				statusDefault:     'Load a backup or select a source',
+				searchPlaceholder: 'Search in names, folders & code...',
+				expandAll:         'Expand all',
+				collapseAll:       'Collapse all',
+				typeAll:           'All',
+				restoreBtn:        'Load into ioBroker',
+				downloadBtn:       'Download',
+				welcomeText:       'Upload a backup or select a local file,<br>to view and restore scripts.',
+				noSocket:          'No socket. Please check if script-restore.{i} is running.',
+				timeout:           'Timeout: Adapter not responding. Is script-restore.{i} running?',
+			},
+			fr: {
+				loaderLoading:     'Chargement de la sauvegarde...',
+				loaderProcessing:  'Traitement en cours...',
+				modalTitle:        'Charger dans ioBroker',
+				modalLabelScript:  'Script :',
+				modalLabelPath:    'Chemin :',
+				modalLabelType:    'Type :',
+				modalLabelSuffix:  'Suffixe (ajouté au nom du script)',
+				modalWarning:      '⚠ Un script à {path} existe déjà.<br>Voulez-vous vraiment l\'écraser ?',
+				modalDismiss:      'Choisir un autre suffixe',
+				modalOverwrite:    'Écraser',
+				modalSuccess:      '✓ Restauré avec succès.<br>Voulez-vous démarrer le script maintenant ?',
+				modalClose:        'Non merci',
+				modalStart:        'Démarrer maintenant',
+				modalLoad:         'Charger',
+				modalLoading:      '⏳ Chargement...',
+				modalStarting:     '⏳ Démarrage...',
+				modalStarted:      '✓ Démarré',
+				modalLoaded:       '✓ Chargé !',
+				modalUnknownError: '✗ Erreur inconnue',
+				modalErrorPrefix:  '✗ Erreur : ',
+				copyBtn:           'Copier le code',
+				copyBtnAction:     'Copier le code',
+				copied:            '✓ Copié !',
+				uploadLabel:       '📂 Téléverser une sauvegarde',
+				localDropdown:     '🗂️ Sauvegardes locales ▾',
+				ftpDropdown:       '🌐 Sauvegardes FTP ▾',
+				smbDropdown:       '🗄️ Sauvegardes SMB ▾',
+				sftpDropdown:      '🔒 Sauvegardes SFTP ▾',
+				webdavDropdown:    '☁️ Sauvegardes WebDAV ▾',
+				httpLoadBtn:       '🌐 Charger URL',
+				zipBtn:            '📦 ZIP',
+				statusDefault:     'Charger une sauvegarde ou choisir une source',
+				searchPlaceholder: 'Rechercher dans les noms, dossiers et code...',
+				expandAll:         'Tout développer',
+				collapseAll:       'Tout réduire',
+				typeAll:           'Tous',
+				restoreBtn:        'Charger dans ioBroker',
+				downloadBtn:       'Télécharger',
+				welcomeText:       'Téléversez une sauvegarde ou sélectionnez un fichier local,<br>pour afficher et restaurer des scripts.',
+				noSocket:          'Pas de socket. Vérifiez si script-restore.{i} est en cours d\'exécution.',
+				timeout:           'Délai d\'attente : l\'adaptateur ne répond pas. script-restore.{i} est-il en cours d\'exécution ?',
+			},
+			es: {
+				loaderLoading:     'Cargando copia de seguridad...',
+				loaderProcessing:  'Procesando...',
+				modalTitle:        'Cargar en ioBroker',
+				modalLabelScript:  'Script:',
+				modalLabelPath:    'Ruta:',
+				modalLabelType:    'Tipo:',
+				modalLabelSuffix:  'Sufijo (se añade al nombre del script)',
+				modalWarning:      '⚠ Ya existe un script en {path}.<br>¿Realmente desea sobrescribirlo?',
+				modalDismiss:      'Elegir otro sufijo',
+				modalOverwrite:    'Sobrescribir',
+				modalSuccess:      '✓ Restaurado con éxito.<br>¿Desea iniciar el script ahora?',
+				modalClose:        'No gracias',
+				modalStart:        'Iniciar ahora',
+				modalLoad:         'Cargar',
+				modalLoading:      '⏳ Cargando...',
+				modalStarting:     '⏳ Iniciando...',
+				modalStarted:      '✓ Iniciado',
+				modalLoaded:       '✓ ¡Cargado!',
+				modalUnknownError: '✗ Error desconocido',
+				modalErrorPrefix:  '✗ Error: ',
+				copyBtn:           'Copiar código',
+				copyBtnAction:     'Copiar código',
+				copied:            '✓ ¡Copiado!',
+				uploadLabel:       '📂 Subir copia de seguridad',
+				localDropdown:     '🗂️ Copias locales ▾',
+				ftpDropdown:       '🌐 Copias FTP ▾',
+				smbDropdown:       '🗄️ Copias SMB ▾',
+				sftpDropdown:      '🔒 Copias SFTP ▾',
+				webdavDropdown:    '☁️ Copias WebDAV ▾',
+				httpLoadBtn:       '🌐 Cargar URL',
+				zipBtn:            '📦 ZIP',
+				statusDefault:     'Cargar una copia de seguridad o seleccionar una fuente',
+				searchPlaceholder: 'Buscar en nombres, carpetas y código...',
+				expandAll:         'Expandir todo',
+				collapseAll:       'Contraer todo',
+				typeAll:           'Todos',
+				restoreBtn:        'Cargar en ioBroker',
+				downloadBtn:       'Descargar',
+				welcomeText:       'Sube una copia de seguridad o selecciona un archivo local,<br>para ver y restaurar scripts.',
+				noSocket:          'Sin socket. Compruebe si script-restore.{i} está en ejecución.',
+				timeout:           'Tiempo de espera agotado: el adaptador no responde. ¿Está script-restore.{i} en ejecución?',
+			},
+			it: {
+				loaderLoading:     'Caricamento backup...',
+				loaderProcessing:  'Elaborazione...',
+				modalTitle:        'Carica in ioBroker',
+				modalLabelScript:  'Script:',
+				modalLabelPath:    'Percorso:',
+				modalLabelType:    'Tipo:',
+				modalLabelSuffix:  'Suffisso (aggiunto al nome dello script)',
+				modalWarning:      '⚠ Esiste già uno script in {path}.<br>Vuoi davvero sovrascriverlo?',
+				modalDismiss:      'Scegli un suffisso diverso',
+				modalOverwrite:    'Sovrascrivi',
+				modalSuccess:      '✓ Ripristinato con successo.<br>Vuoi avviare lo script adesso?',
+				modalClose:        'No grazie',
+				modalStart:        'Avvia ora',
+				modalLoad:         'Carica',
+				modalLoading:      '⏳ Caricamento...',
+				modalStarting:     '⏳ Avvio...',
+				modalStarted:      '✓ Avviato',
+				modalLoaded:       '✓ Caricato!',
+				modalUnknownError: '✗ Errore sconosciuto',
+				modalErrorPrefix:  '✗ Errore: ',
+				copyBtn:           'Copia codice',
+				copyBtnAction:     'Copia codice',
+				copied:            '✓ Copiato!',
+				uploadLabel:       '📂 Carica backup',
+				localDropdown:     '🗂️ Backup locali ▾',
+				ftpDropdown:       '🌐 Backup FTP ▾',
+				smbDropdown:       '🗄️ Backup SMB ▾',
+				sftpDropdown:      '🔒 Backup SFTP ▾',
+				webdavDropdown:    '☁️ Backup WebDAV ▾',
+				httpLoadBtn:       '🌐 Carica URL',
+				zipBtn:            '📦 ZIP',
+				statusDefault:     'Carica un backup o seleziona una sorgente',
+				searchPlaceholder: 'Cerca in nomi, cartelle e codice...',
+				expandAll:         'Espandi tutto',
+				collapseAll:       'Comprimi tutto',
+				typeAll:           'Tutti',
+				restoreBtn:        'Carica in ioBroker',
+				downloadBtn:       'Scarica',
+				welcomeText:       'Carica un backup o seleziona un file locale,<br>per visualizzare e ripristinare gli script.',
+				noSocket:          'Nessun socket. Verificare se script-restore.{i} è in esecuzione.',
+				timeout:           'Timeout: l\'adattatore non risponde. script-restore.{i} è in esecuzione?',
+			},
+			nl: {
+				loaderLoading:     'Back-up laden...',
+				loaderProcessing:  'Verwerken...',
+				modalTitle:        'Laden in ioBroker',
+				modalLabelScript:  'Script:',
+				modalLabelPath:    'Pad:',
+				modalLabelType:    'Type:',
+				modalLabelSuffix:  'Achtervoegsel (toegevoegd aan de scriptnaam)',
+				modalWarning:      '⚠ Er bestaat al een script op {path}.<br>Wilt u het echt overschrijven?',
+				modalDismiss:      'Ander achtervoegsel kiezen',
+				modalOverwrite:    'Overschrijven',
+				modalSuccess:      '✓ Succesvol hersteld.<br>Wilt u het script nu starten?',
+				modalClose:        'Nee bedankt',
+				modalStart:        'Nu starten',
+				modalLoad:         'Laden',
+				modalLoading:      '⏳ Laden...',
+				modalStarting:     '⏳ Starten...',
+				modalStarted:      '✓ Gestart',
+				modalLoaded:       '✓ Geladen!',
+				modalUnknownError: '✗ Onbekende fout',
+				modalErrorPrefix:  '✗ Fout: ',
+				copyBtn:           'Code kopiëren',
+				copyBtnAction:     'Code kopiëren',
+				copied:            '✓ Gekopieerd!',
+				uploadLabel:       '📂 Back-up uploaden',
+				localDropdown:     '🗂️ Lokale back-ups ▾',
+				ftpDropdown:       '🌐 FTP back-ups ▾',
+				smbDropdown:       '🗄️ SMB back-ups ▾',
+				sftpDropdown:      '🔒 SFTP back-ups ▾',
+				webdavDropdown:    '☁️ WebDAV back-ups ▾',
+				httpLoadBtn:       '🌐 URL laden',
+				zipBtn:            '📦 ZIP',
+				statusDefault:     'Laad een back-up of kies een bron',
+				searchPlaceholder: 'Zoeken in namen, mappen en code...',
+				expandAll:         'Alles uitklappen',
+				collapseAll:       'Alles inklappen',
+				typeAll:           'Alle',
+				restoreBtn:        'Laden in ioBroker',
+				downloadBtn:       'Downloaden',
+				welcomeText:       'Upload een back-up of selecteer een lokaal bestand,<br>om scripts te bekijken en te herstellen.',
+				noSocket:          'Geen socket. Controleer of script-restore.{i} actief is.',
+				timeout:           'Time-out: adapter reageert niet. Is script-restore.{i} actief?',
+			},
+			pl: {
+				loaderLoading:     'Wczytywanie kopii zapasowej...',
+				loaderProcessing:  'Przetwarzanie...',
+				modalTitle:        'Wczytaj do ioBroker',
+				modalLabelScript:  'Skrypt:',
+				modalLabelPath:    'Ścieżka:',
+				modalLabelType:    'Typ:',
+				modalLabelSuffix:  'Sufiks (dodawany do nazwy skryptu)',
+				modalWarning:      '⚠ Skrypt w {path} już istnieje.<br>Czy na pewno chcesz go nadpisać?',
+				modalDismiss:      'Wybierz inny sufiks',
+				modalOverwrite:    'Nadpisz',
+				modalSuccess:      '✓ Przywrócono pomyślnie.<br>Czy chcesz teraz uruchomić skrypt?',
+				modalClose:        'Nie, dziękuję',
+				modalStart:        'Uruchom teraz',
+				modalLoad:         'Wczytaj',
+				modalLoading:      '⏳ Wczytywanie...',
+				modalStarting:     '⏳ Uruchamianie...',
+				modalStarted:      '✓ Uruchomiono',
+				modalLoaded:       '✓ Wczytano!',
+				modalUnknownError: '✗ Nieznany błąd',
+				modalErrorPrefix:  '✗ Błąd: ',
+				copyBtn:           'Kopiuj kod',
+				copyBtnAction:     'Kopiuj kod',
+				copied:            '✓ Skopiowano!',
+				uploadLabel:       '📂 Prześlij kopię zapasową',
+				localDropdown:     '🗂️ Lokalne kopie ▾',
+				ftpDropdown:       '🌐 Kopie FTP ▾',
+				smbDropdown:       '🗄️ Kopie SMB ▾',
+				sftpDropdown:      '🔒 Kopie SFTP ▾',
+				webdavDropdown:    '☁️ Kopie WebDAV ▾',
+				httpLoadBtn:       '🌐 Wczytaj URL',
+				zipBtn:            '📦 ZIP',
+				statusDefault:     'Wczytaj kopię zapasową lub wybierz źródło',
+				searchPlaceholder: 'Szukaj w nazwach, folderach i kodzie...',
+				expandAll:         'Rozwiń wszystko',
+				collapseAll:       'Zwiń wszystko',
+				typeAll:           'Wszystkie',
+				restoreBtn:        'Wczytaj do ioBroker',
+				downloadBtn:       'Pobierz',
+				welcomeText:       'Prześlij kopię zapasową lub wybierz plik lokalny,<br>aby wyświetlić i przywrócić skrypty.',
+				noSocket:          'Brak gniazda. Sprawdź, czy script-restore.{i} działa.',
+				timeout:           'Przekroczono czas: adapter nie odpowiada. Czy script-restore.{i} działa?',
+			},
+			pt: {
+				loaderLoading:     'A carregar cópia de segurança...',
+				loaderProcessing:  'A processar...',
+				modalTitle:        'Carregar no ioBroker',
+				modalLabelScript:  'Script:',
+				modalLabelPath:    'Caminho:',
+				modalLabelType:    'Tipo:',
+				modalLabelSuffix:  'Sufixo (adicionado ao nome do script)',
+				modalWarning:      '⚠ Já existe um script em {path}.<br>Tem a certeza que deseja substituí-lo?',
+				modalDismiss:      'Escolher outro sufixo',
+				modalOverwrite:    'Substituir',
+				modalSuccess:      '✓ Restaurado com sucesso.<br>Deseja iniciar o script agora?',
+				modalClose:        'Não, obrigado',
+				modalStart:        'Iniciar agora',
+				modalLoad:         'Carregar',
+				modalLoading:      '⏳ A carregar...',
+				modalStarting:     '⏳ A iniciar...',
+				modalStarted:      '✓ Iniciado',
+				modalLoaded:       '✓ Carregado!',
+				modalUnknownError: '✗ Erro desconhecido',
+				modalErrorPrefix:  '✗ Erro: ',
+				copyBtn:           'Copiar código',
+				copyBtnAction:     'Copiar código',
+				copied:            '✓ Copiado!',
+				uploadLabel:       '📂 Carregar cópia de segurança',
+				localDropdown:     '🗂️ Cópias locais ▾',
+				ftpDropdown:       '🌐 Cópias FTP ▾',
+				smbDropdown:       '🗄️ Cópias SMB ▾',
+				sftpDropdown:      '🔒 Cópias SFTP ▾',
+				webdavDropdown:    '☁️ Cópias WebDAV ▾',
+				httpLoadBtn:       '🌐 Carregar URL',
+				zipBtn:            '📦 ZIP',
+				statusDefault:     'Carregar uma cópia de segurança ou selecionar uma fonte',
+				searchPlaceholder: 'Pesquisar em nomes, pastas e código...',
+				expandAll:         'Expandir tudo',
+				collapseAll:       'Recolher tudo',
+				typeAll:           'Todos',
+				restoreBtn:        'Carregar no ioBroker',
+				downloadBtn:       'Transferir',
+				welcomeText:       'Carregue uma cópia de segurança ou selecione um ficheiro local,<br>para ver e restaurar scripts.',
+				noSocket:          'Sem socket. Verifique se script-restore.{i} está em execução.',
+				timeout:           'Tempo esgotado: o adaptador não responde. O script-restore.{i} está em execução?',
+			},
+			ru: {
+				loaderLoading:     'Загрузка резервной копии...',
+				loaderProcessing:  'Обработка...',
+				modalTitle:        'Загрузить в ioBroker',
+				modalLabelScript:  'Скрипт:',
+				modalLabelPath:    'Путь:',
+				modalLabelType:    'Тип:',
+				modalLabelSuffix:  'Суффикс (добавляется к имени скрипта)',
+				modalWarning:      '⚠ Скрипт по пути {path} уже существует.<br>Вы действительно хотите перезаписать его?',
+				modalDismiss:      'Выбрать другой суффикс',
+				modalOverwrite:    'Перезаписать',
+				modalSuccess:      '✓ Успешно восстановлено.<br>Хотите запустить скрипт сейчас?',
+				modalClose:        'Нет, спасибо',
+				modalStart:        'Запустить сейчас',
+				modalLoad:         'Загрузить',
+				modalLoading:      '⏳ Загрузка...',
+				modalStarting:     '⏳ Запуск...',
+				modalStarted:      '✓ Запущен',
+				modalLoaded:       '✓ Загружен!',
+				modalUnknownError: '✗ Неизвестная ошибка',
+				modalErrorPrefix:  '✗ Ошибка: ',
+				copyBtn:           'Копировать код',
+				copyBtnAction:     'Копировать код',
+				copied:            '✓ Скопировано!',
+				uploadLabel:       '📂 Загрузить резервную копию',
+				localDropdown:     '🗂️ Локальные резервные копии ▾',
+				ftpDropdown:       '🌐 Резервные копии FTP ▾',
+				smbDropdown:       '🗄️ Резервные копии SMB ▾',
+				sftpDropdown:      '🔒 Резервные копии SFTP ▾',
+				webdavDropdown:    '☁️ Резервные копии WebDAV ▾',
+				httpLoadBtn:       '🌐 Загрузить URL',
+				zipBtn:            '📦 ZIP',
+				statusDefault:     'Загрузите резервную копию или выберите источник',
+				searchPlaceholder: 'Поиск по именам, папкам и коду...',
+				expandAll:         'Развернуть всё',
+				collapseAll:       'Свернуть всё',
+				typeAll:           'Все',
+				restoreBtn:        'Загрузить в ioBroker',
+				downloadBtn:       'Скачать',
+				welcomeText:       'Загрузите резервную копию или выберите локальный файл,<br>чтобы просмотреть и восстановить скрипты.',
+				noSocket:          'Нет сокета. Проверьте, запущен ли script-restore.{i}.',
+				timeout:           'Таймаут: адаптер не отвечает. Запущен ли script-restore.{i}?',
+			},
+			uk: {
+				loaderLoading:     'Завантаження резервної копії...',
+				loaderProcessing:  'Обробка...',
+				modalTitle:        'Завантажити в ioBroker',
+				modalLabelScript:  'Скрипт:',
+				modalLabelPath:    'Шлях:',
+				modalLabelType:    'Тип:',
+				modalLabelSuffix:  'Суфікс (додається до назви скрипта)',
+				modalWarning:      '⚠ Скрипт за шляхом {path} вже існує.<br>Ви дійсно хочете його перезаписати?',
+				modalDismiss:      'Вибрати інший суфікс',
+				modalOverwrite:    'Перезаписати',
+				modalSuccess:      '✓ Успішно відновлено.<br>Хочете запустити скрипт зараз?',
+				modalClose:        'Ні, дякую',
+				modalStart:        'Запустити зараз',
+				modalLoad:         'Завантажити',
+				modalLoading:      '⏳ Завантаження...',
+				modalStarting:     '⏳ Запуск...',
+				modalStarted:      '✓ Запущено',
+				modalLoaded:       '✓ Завантажено!',
+				modalUnknownError: '✗ Невідома помилка',
+				modalErrorPrefix:  '✗ Помилка: ',
+				copyBtn:           'Копіювати код',
+				copyBtnAction:     'Копіювати код',
+				copied:            '✓ Скопійовано!',
+				uploadLabel:       '📂 Завантажити резервну копію',
+				localDropdown:     '🗂️ Локальні резервні копії ▾',
+				ftpDropdown:       '🌐 Резервні копії FTP ▾',
+				smbDropdown:       '🗄️ Резервні копії SMB ▾',
+				sftpDropdown:      '🔒 Резервні копії SFTP ▾',
+				webdavDropdown:    '☁️ Резервні копії WebDAV ▾',
+				httpLoadBtn:       '🌐 Завантажити URL',
+				zipBtn:            '📦 ZIP',
+				statusDefault:     'Завантажте резервну копію або оберіть джерело',
+				searchPlaceholder: 'Пошук за іменами, папками та кодом...',
+				expandAll:         'Розгорнути все',
+				collapseAll:       'Згорнути все',
+				typeAll:           'Усі',
+				restoreBtn:        'Завантажити в ioBroker',
+				downloadBtn:       'Завантажити',
+				welcomeText:       'Завантажте резервну копію або оберіть локальний файл,<br>щоб переглянути та відновити скрипти.',
+				noSocket:          'Немає сокета. Перевірте, чи запущено script-restore.{i}.',
+				timeout:           'Час очікування вичерпано: адаптер не відповідає. Чи запущено script-restore.{i}?',
+			},
+			'zh-cn': {
+				loaderLoading:     '正在加载备份...',
+				loaderProcessing:  '处理中...',
+				modalTitle:        '加载到 ioBroker',
+				modalLabelScript:  '脚本：',
+				modalLabelPath:    '路径：',
+				modalLabelType:    '类型：',
+				modalLabelSuffix:  '后缀（附加到脚本名称）',
+				modalWarning:      '⚠ {path} 下已存在一个脚本。<br>您真的要覆盖它吗？',
+				modalDismiss:      '选择其他后缀',
+				modalOverwrite:    '覆盖',
+				modalSuccess:      '✓ 恢复成功。<br>是否立即启动该脚本？',
+				modalClose:        '不，谢谢',
+				modalStart:        '立即启动',
+				modalLoad:         '加载',
+				modalLoading:      '⏳ 加载中...',
+				modalStarting:     '⏳ 启动中...',
+				modalStarted:      '✓ 已启动',
+				modalLoaded:       '✓ 已加载！',
+				modalUnknownError: '✗ 未知错误',
+				modalErrorPrefix:  '✗ 错误：',
+				copyBtn:           '复制代码',
+				copyBtnAction:     '复制代码',
+				copied:            '✓ 已复制！',
+				uploadLabel:       '📂 上传备份',
+				localDropdown:     '🗂️ 本地备份 ▾',
+				ftpDropdown:       '🌐 FTP 备份 ▾',
+				smbDropdown:       '🗄️ SMB 备份 ▾',
+				sftpDropdown:      '🔒 SFTP 备份 ▾',
+				webdavDropdown:    '☁️ WebDAV 备份 ▾',
+				httpLoadBtn:       '🌐 加载 URL',
+				zipBtn:            '📦 ZIP',
+				statusDefault:     '加载备份或选择来源',
+				searchPlaceholder: '在名称、文件夹和代码中搜索...',
+				expandAll:         '全部展开',
+				collapseAll:       '全部折叠',
+				typeAll:           '全部',
+				restoreBtn:        '加载到 ioBroker',
+				downloadBtn:       '下载',
+				welcomeText:       '上传备份或选择本地文件，<br>以查看和恢复脚本。',
+				noSocket:          '无套接字。请检查 script-restore.{i} 是否正在运行。',
+				timeout:           '超时：适配器无响应。script-restore.{i} 是否正在运行？',
+			},
+		};
+
+		function detectLang() {
+			// 1. URL parameter
+			const lp = urlParams.get('lang') || urlParams.get('language');
+			if (lp) return normLang(lp);
+			// 2. localStorage
+			try {
+				const ls = localStorage.getItem('App.language') || localStorage.getItem('ioBroker.locale');
+				if (ls) return normLang(ls);
+			} catch(e) {}
+			// 3. Parent frame
+			try {
+				const p = window.parent;
+				if (p && (p.sysLang || p.systemLang)) return normLang(p.sysLang || p.systemLang);
+			} catch(e) {}
+			// 4. Navigator
+			return normLang(navigator.language || 'en');
+		}
+
+		function normLang(l) {
+			if (!l) return 'en';
+			const ll = l.toLowerCase().replace('_', '-');
+			if (ll === 'zh-cn' || ll === 'zh') return 'zh-cn';
+			return ll.slice(0, 2);
+		}
+
+		const LANG = (function() {
+			const detected = detectLang();
+			return TRANSLATIONS[detected] ? detected : 'en';
+		})();
+
+		function t(key) {
+			return (TRANSLATIONS[LANG] && TRANSLATIONS[LANG][key]) || (TRANSLATIONS.en && TRANSLATIONS.en[key]) || key;
+		}
+
+		function applyTranslations() {
+			document.querySelectorAll('[data-i18n]').forEach(function(el) {
+				el.textContent = t(el.getAttribute('data-i18n'));
+			});
+			document.querySelectorAll('[data-i18n-html]').forEach(function(el) {
+				el.innerHTML = t(el.getAttribute('data-i18n-html'));
+			});
+			document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+				el.placeholder = t(el.getAttribute('data-i18n-placeholder'));
+			});
+			document.querySelectorAll('[data-i18n-title]').forEach(function(el) {
+				el.title = t(el.getAttribute('data-i18n-title'));
+			});
+		}
+
+		applyTranslations();
 
 		// === Dark Theme Detection ===
 		function applyTheme(isDark) {
@@ -625,14 +1152,14 @@
 
 		function sendTo(command, message, callback) {
 			if (!socket) {
-				callback({ error: 'Kein Socket. Bitte prüfen ob script-restore.' + instance + ' läuft.' });
+				callback({ error: t('noSocket').replace('{i}', instance) });
 				return;
 			}
 			let done = false;
 			const timer = setTimeout(() => {
 				if (done) return;
 				done = true;
-				callback({ error: 'Timeout: Adapter antwortet nicht. Läuft script-restore.' + instance + '?' });
+				callback({ error: t('timeout').replace('{i}', instance) });
 			}, 30000);
 			const wrapped = (result) => {
 				if (done) return;
@@ -1038,13 +1565,13 @@
 			document.getElementById('spinnerEl').style.display = 'none';
 			document.getElementById('progressCircle').style.background = 'conic-gradient(var(--primary) 0%, #e9ecef 0%)';
 			document.getElementById('progressPercent').textContent = '0%';
-			document.getElementById('loaderText').textContent = text || 'Laden...';
+			document.getElementById('loaderText').textContent = text || t('loaderLoading');
 			document.getElementById('loader').style.display = 'flex';
 		}
 		function showLoaderSpinner(text) {
 			document.getElementById('progressContainer').style.display = 'none';
 			document.getElementById('spinnerEl').style.display = 'block';
-			document.getElementById('loaderText').textContent = text || 'Verarbeite...';
+			document.getElementById('loaderText').textContent = text || t('loaderProcessing');
 			document.getElementById('loader').style.display = 'flex';
 		}
 		function updateProgress(pct) {
@@ -1061,7 +1588,7 @@
 			isAllExpanded = !isAllExpanded;
 			const btn = document.getElementById('expandToggleBtn');
 			btn.innerHTML = isAllExpanded ? '📁' : '📂';
-			btn.title = isAllExpanded ? 'Alle einklappen' : 'Alle aufklappen';
+			btn.title = isAllExpanded ? t('collapseAll') : t('expandAll');
 			document.querySelectorAll('.tree-folder').forEach(el => {
 				const p = el.dataset.path;
 				const icon = el.querySelector('.folder-icon');
@@ -1248,12 +1775,12 @@
 			ta.value = txt; document.body.appendChild(ta); ta.select();
 			try {
 				document.execCommand('copy');
-				btn.textContent = '✓ Kopiert!';
+				btn.textContent = t('copied');
 				btn.classList.replace('btn-outline-light', 'btn-outline-success');
 			} finally {
 				document.body.removeChild(ta);
 				setTimeout(() => {
-					btn.textContent = 'Code Kopieren';
+					btn.textContent = t('copyBtnAction');
 					btn.classList.replace('btn-outline-success', 'btn-outline-light');
 				}, 1500);
 			}
@@ -1325,18 +1852,18 @@
 			const msgEl = document.getElementById('rmMsg');
 			const confirmBtn = document.getElementById('rmConfirmBtn');
 			msgEl.style.color = '#aaa';
-			msgEl.textContent = '⏳ Laden...';
+			msgEl.textContent = t('modalLoading');
 			confirmBtn.disabled = true;
 			sendTo('restoreScript', { path: s.path, name: s.name, type: s.type, source: s.source, suffix, overwrite: !!overwrite }, function(result) {
 				if (result && result.exists) {
-					document.getElementById('rmWarningPath').textContent = result.id.replace(/^script\.js\./, '');
+					document.querySelector('#rmWarning p').innerHTML = t('modalWarning').replace('{path}', '<code>' + escapeHTML(result.id.replace(/^script\.js\./, '')) + '</code>');
 					document.getElementById('rmWarning').style.display = 'block';
 					document.getElementById('rmSuffix').disabled = true;
 					msgEl.textContent = '';
 				} else if (result && result.error) {
 					confirmBtn.disabled = false;
 					msgEl.style.color = '#dc3545';
-					msgEl.textContent = '✗ ' + result.error;
+					msgEl.textContent = t('modalErrorPrefix') + result.error;
 				} else if (result && result.success) {
 					_restoredScriptId = result.id;
 					msgEl.textContent = '';
@@ -1345,7 +1872,7 @@
 				} else {
 					confirmBtn.disabled = false;
 					msgEl.style.color = '#dc3545';
-					msgEl.textContent = '✗ Unbekannter Fehler';
+					msgEl.textContent = t('modalUnknownError');
 				}
 			});
 		}
@@ -1367,16 +1894,16 @@
 			if (!_restoredScriptId) return;
 			const startBtn = document.getElementById('rmStartBtn');
 			startBtn.disabled = true;
-			startBtn.textContent = '⏳ Starte...';
+			startBtn.textContent = t('modalStarting');
 			sendTo('enableScript', { id: _restoredScriptId }, function(result) {
 				if (result && result.success) {
-					startBtn.textContent = '✓ Gestartet';
+					startBtn.textContent = t('modalStarted');
 					setTimeout(() => closeRestoreModal(), 1000);
 				} else {
 					startBtn.disabled = false;
-					startBtn.textContent = 'Jetzt starten';
+					startBtn.textContent = t('modalStart');
 					const p = document.querySelector('#rmSuccess p');
-					p.innerHTML = '✗ Fehler: ' + ((result && result.error) || 'Unbekannt');
+					p.innerHTML = t('modalErrorPrefix') + escapeHTML((result && result.error) || 'Unbekannt');
 					p.style.color = '#dc3545';
 				}
 			});
