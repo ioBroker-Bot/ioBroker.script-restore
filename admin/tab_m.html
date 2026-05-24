@@ -1000,17 +1000,22 @@
 			// 1. URL parameter
 			const lp = urlParams.get('lang') || urlParams.get('language');
 			if (lp) return normLang(lp);
-			// 2. localStorage
+			// 2. localStorage (verschiedene Admin-Versionen)
 			try {
-				const ls = localStorage.getItem('App.language') || localStorage.getItem('ioBroker.locale');
-				if (ls) return normLang(ls);
+				for (const k of ['App.language', 'ioBroker.locale', 'lang', 'language']) {
+					const v = localStorage.getItem(k);
+					if (v && v.length >= 2) return normLang(v);
+				}
 			} catch(e) {}
-			// 3. Parent frame
+			// 3. Parent frame (Admin v5/v6/v7)
 			try {
 				const p = window.parent;
-				if (p && (p.sysLang || p.systemLang)) return normLang(p.sysLang || p.systemLang);
+				if (p.sysLang) return normLang(p.sysLang);
+				if (p.systemLang) return normLang(p.systemLang);
+				if (p.main && p.main.language) return normLang(p.main.language);
+				if (p.app && p.app.language) return normLang(p.app.language);
 			} catch(e) {}
-			// 4. Navigator
+			// 4. Browser-Sprache
 			return normLang(navigator.language || 'en');
 		}
 
@@ -1021,13 +1026,36 @@
 			return ll.slice(0, 2);
 		}
 
-		const LANG = (function() {
+		let LANG = (function() {
 			const detected = detectLang();
 			return TRANSLATIONS[detected] ? detected : 'en';
 		})();
 
 		function t(key) {
 			return (TRANSLATIONS[LANG] && TRANSLATIONS[LANG][key]) || (TRANSLATIONS.en && TRANSLATIONS.en[key]) || key;
+		}
+
+		function applyLangFromSocket() {
+			if (!socket) return;
+			const apply = function(lang) {
+				if (!lang) return;
+				const l = normLang(lang);
+				if (TRANSLATIONS[l] && l !== LANG) {
+					LANG = l;
+					applyTranslations();
+				}
+			};
+			try {
+				if (typeof socket.getSystemConfig === 'function') {
+					Promise.resolve(socket.getSystemConfig()).then(function(cfg) {
+						if (cfg && cfg.common) apply(cfg.common.language);
+					}).catch(function() {});
+				} else if (typeof socket.emit === 'function') {
+					socket.emit('getObject', 'system.config', function(err, obj) {
+						if (!err && obj && obj.common) apply(obj.common.language);
+					});
+				}
+			} catch(e) {}
 		}
 
 		function applyTranslations() {
@@ -1178,6 +1206,7 @@
 		}
 
 		initSocket();
+		applyLangFromSocket();
 
 		// === Resizer ===
 		const resizerEl = document.getElementById('resizer');
