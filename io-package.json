@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "news": {
+      "0.1.3": {
+        "en": "fix language flash: skip socket override when language already detected from admin frame\nreplace all hardcoded status strings with translated t() calls\nadd codeHint translation key in all 11 languages",
+        "de": "fixer sprachblitz: überschreiben der sprachfassung, wenn die sprache bereits von admin-rahmen erkannt wurde\nalle hardcoded status strings durch übersetzte t()-anrufe ersetzen\ncode hinzufügenHint Übersetzungsschlüssel in allen 11 Sprachen",
+        "ru": "исправьте языковую вспышку: пропустите переопределение сокетов, когда язык уже обнаружен в рамке администратора\nзаменить все жестко закодированные строки состояния переводными вызовами t()\nдобавить ключ перевода codeHint на все 11 языков",
+        "pt": "flash da linguagem de correção: sobreposição do socket pule quando a linguagem já detectada do frame do administrador\nsubstituir todas as cadeias de estado codificadas por chamadas traduzidas em t()\nadicionar códigoHint chave de tradução em todos os 11 idiomas",
+        "nl": "fix taalflits: sla socket over wanneer taal al gedetecteerd vanuit admin frame\nvervangen alle hardcoded status strings door vertaalde t() calls\ncodeHint vertaalsleutel toevoegen in alle 11 talen",
+        "fr": "résoudre le flash de langue: sauter la préséance socket lorsque la langue déjà détectée à partir du cadre admin\nremplacer toutes les chaînes d'état codées en dur par des appels traduit t()\najouter codeHint clé de traduction dans les 11 langues",
+        "it": "fix lingua flash: saltare socket override quando la lingua già rilevata dalla cornice di amministrazione\nsostituire tutte le stringhe di stato codificate con le chiamate t() tradotte\naggiungere codice Chiave di traduzione in tutte le 11 lingue",
+        "es": "solucionar el flash del lenguaje: saltar la anulación de la toma cuando el lenguaje ya detectado desde el marco de administración\nreemplazar todas las cadenas de estado codificadas con llamadas t( traducido)\nañadir codeHint traducción clave en los 11 idiomas",
+        "pl": "fix flash język: skip derogator gniazda, gdy język już wykryty z ramki admin\nzastąp wszystkie zaszyfrowane łańcuchy stanu translated t () calls\ndodaj klucz tłumaczeniowy CodeHint we wszystkich 11 językach",
+        "uk": "фіксувати мовне спалах: пропустити розетку перенапругою, коли мова вже виявлена з адмін кадру\nзамінити всі жорсткікодовані рядки стану з перекладеними t() дзвінки\nadd codeПеревірити ключ у всіх 11 мовах",
+        "zh-cn": "修补语言闪存: 当语言已经从管理员框架中检测到时跳过套接字覆盖\n将所有硬码状态字符串替换为已翻译的 t() 调用\n在所有11种语言中添加代码Hint翻译密钥"
+      },
       "0.1.2": {
         "en": "add full i18n to tab UI: all strings translated into de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
         "de": "fügen Sie volle i18n zu Tab UI: alle Strings übersetzt in de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn",
@@ -80,19 +93,6 @@
         "pl": "Poprawiono rozmiary responsywne jsonConfig; aktualności ograniczone do 7; dodano cooldown Dependabot",
         "uk": "Виправлено розміри jsonConfig; новини скорочено до 7; додано cooldown Dependabot",
         "zh-cn": "修复 jsonConfig 响应式尺寸；新闻条目减少至 7 条；添加 Dependabot 冷却时间"
-      },
-      "0.0.9": {
-        "en": "Fix jsonConfig: add responsive size attributes, i18n support, remove outdated admin files",
-        "de": "jsonConfig: Responsive Size-Attribute ergänzt, i18n-Unterstützung, veraltete Admin-Dateien entfernt",
-        "ru": "jsonConfig: добавлены атрибуты размера, поддержка i18n, удалены устаревшие файлы admin",
-        "pt": "jsonConfig: atributos de tamanho responsivos, suporte i18n, remoção de ficheiros admin obsoletos",
-        "nl": "jsonConfig: responsieve grootteattributen, i18n-ondersteuning, verouderde adminbestanden verwijderd",
-        "fr": "jsonConfig: attributs de taille responsifs, support i18n, suppression fichiers admin obsolètes",
-        "it": "jsonConfig: attributi dimensione responsivi, supporto i18n, rimozione file admin obsoleti",
-        "es": "jsonConfig: atributos de tamaño responsivos, soporte i18n, eliminación de archivos admin obsoletos",
-        "pl": "jsonConfig: atrybuty rozmiaru responsywnego, wsparcie i18n, usunięcie przestarzałych plików admin",
-        "uk": "jsonConfig: атрибути розміру, підтримка i18n, видалення застарілих файлів admin",
-        "zh-cn": "jsonConfig：添加响应式尺寸属性、i18n 支持，删除过时的 admin 文件"
       }
     },
     "titleLang": {

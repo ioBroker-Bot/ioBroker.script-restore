@@ -75,6 +75,11 @@ The archive is parsed entirely in the browser — no files are written to disk d
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 0.1.3 (2026-05-24)
+* (ipod86) fix language flash: skip socket override when language already detected from admin frame
+* (ipod86) replace all hardcoded status strings with translated t() calls
+* (ipod86) add codeHint translation key in all 11 languages
+
 ### 0.1.2 (2026-05-24)
 * (ipod86) add full i18n to tab UI: all strings translated into de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn
 
@@ -92,11 +97,6 @@ The archive is parsed entirely in the browser — no files are written to disk d
 ### 0.0.12 (2026-04-30)
 * (ipod86) add common.singleton to prevent multiple instances
 * (ipod86) complete i18n translations for all supported languages (fr, es, it, nl, pl, pt, ru, uk, zh-cn)
-
-### 0.0.11 (2026-04-13)
-* (ipod86) add type filter (JS/TS/Blockly/Rules) in script sidebar
-* (ipod86) add direct restore into ioBroker with suffix input and confirm modal
-* (ipod86) remove obsolete admin/words.js and .prettierignore
 
 ## License
 MIT License

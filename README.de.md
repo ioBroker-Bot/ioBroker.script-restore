@@ -77,7 +77,12 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.3 (2026-05-24)
+* (ipod86) Language-Flash behoben: Socket-Override wird übersprungen wenn Sprache bereits vom Admin-Frame erkannt wurde
+* (ipod86) Alle hardcodierten Statusmeldungen durch übersetzte t()-Aufrufe ersetzt
+* (ipod86) codeHint-Übersetzungsschlüssel in alle 11 Sprachen ergänzt
+
+### 0.1.2 (2026-05-24)
 * (ipod86) Vollständige i18n im Admin-Tab: alle Strings in de/en/fr/es/it/nl/pl/pt/ru/uk/zh-cn übersetzt
 
 ### 0.1.1 (2026-05-24)

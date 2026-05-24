@@ -2,6 +2,11 @@
 
 ### 0.0.1 (2026-04-06)
 * (ipod86) initial release
+## 0.0.11 (2026-04-13)
+* (ipod86) add type filter (JS/TS/Blockly/Rules) in script sidebar
+* (ipod86) add direct restore into ioBroker with suffix input and confirm modal
+* (ipod86) remove obsolete admin/words.js and .prettierignore
+
 ## 0.0.10 (2026-04-08)
 * (ipod86) fix jsonConfig responsive sizes lg/xl for backupPath (E5509)
 * (ipod86) trim news entries to 7 (W1032)
