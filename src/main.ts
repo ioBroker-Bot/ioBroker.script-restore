@@ -779,8 +779,15 @@ class ScriptRestore extends utils.Adapter {
 	// ─── Restore to ioBroker ─────────────────────────────────────────────────
 
 	private async handleRestoreScript(obj: ioBroker.Message): Promise<void> {
-		const msg = obj.message as { path: string; name: string; type: string; source: string; suffix: string };
-		const suffix = msg.suffix || "_rcvr";
+		const msg = obj.message as {
+			path: string;
+			name: string;
+			type: string;
+			source: string;
+			suffix: string;
+			overwrite?: boolean;
+		};
+		const suffix = msg.suffix ?? "";
 
 		// Append suffix to the last path segment (same logic as scriptRecovery.js)
 		const parts = msg.path.split(".");
@@ -789,15 +796,14 @@ class ScriptRestore extends utils.Adapter {
 		const newId = `script.js.${newScriptPath}`;
 		const newName = msg.name + suffix;
 
-		// Do not overwrite existing scripts
 		let existing: ioBroker.Object | null | undefined;
 		try {
 			existing = await this.getForeignObjectAsync(newId);
 		} catch {
 			existing = null;
 		}
-		if (existing) {
-			this.sendTo(obj.from, obj.command, { error: `Skript existiert bereits: ${newId}` }, obj.callback);
+		if (existing && !msg.overwrite) {
+			this.sendTo(obj.from, obj.command, { exists: true, id: newId }, obj.callback);
 			return;
 		}
 

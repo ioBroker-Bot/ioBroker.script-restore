@@ -356,6 +356,18 @@
 		body.dark .restore-modal label { color: #aaa; }
 		body.dark .restore-modal input[type=text] { background: #1a1a2e; border-color: #4a4a6a; color: #e0e0e0; }
 		body.dark .restore-modal-preview { color: #7a7aaa; }
+		.restore-modal-warning {
+			background: #fff3cd; border: 1px solid #ffc107; border-radius: 6px;
+			padding: 12px 14px; margin-top: 14px; display: none;
+		}
+		.restore-modal-warning p { margin: 0 0 10px; font-size: 0.88rem; color: #664d03; line-height: 1.5; }
+		.restore-modal-warning code { background: rgba(0,0,0,0.08); padding: 1px 5px; border-radius: 3px; font-family: 'Consolas', monospace; word-break: break-all; font-size: 0.85em; }
+		.restore-modal-warning .rmw-actions { display: flex; gap: 8px; justify-content: flex-end; }
+		.btn-danger { background: #dc3545; color: white; border-color: #dc3545; }
+		.btn-danger:hover { background: #bb2d3b; border-color: #b02a37; }
+		body.dark .restore-modal-warning { background: #2d1f00; border-color: #7a5f00; }
+		body.dark .restore-modal-warning p { color: #ffd966; }
+		body.dark .restore-modal-warning code { background: rgba(255,255,255,0.1); color: #ffb347; }
 
 		/* Responsive */
 		@media (max-width: 768px) {
@@ -386,12 +398,19 @@
 				<div>Typ: <strong id="rmScriptType"></strong></div>
 			</div>
 			<label for="rmSuffix">Suffix (wird an den Skriptnamen angehängt)</label>
-			<input type="text" id="rmSuffix" value="_rcvr" oninput="updateRestorePreview()">
+			<input type="text" id="rmSuffix" value="_rcvr" oninput="updateRestorePreview();">
 			<div class="restore-modal-preview" id="rmPreview"></div>
+			<div class="restore-modal-warning" id="rmWarning">
+				<p>⚠ Ein Skript unter <code id="rmWarningPath"></code> existiert bereits.<br>Soll es wirklich überschrieben werden?</p>
+				<div class="rmw-actions">
+					<button class="btn btn-outline" onclick="dismissWarning()">Anderen Suffix wählen</button>
+					<button class="btn btn-danger" onclick="overwriteConfirmed()">Überschreiben</button>
+				</div>
+			</div>
 			<div class="restore-modal-footer">
 				<span id="rmMsg" style="flex:1;font-size:0.85rem;align-self:center;"></span>
-				<button class="btn btn-outline" onclick="closeRestoreModal()">Abbrechen</button>
-				<button class="btn btn-outline-success" id="rmConfirmBtn" onclick="confirmRestoreScript()">Laden</button>
+				<button class="btn btn-outline" onclick="closeRestoreModal()">Schließen</button>
+				<button class="btn btn-outline-success" id="rmConfirmBtn" onclick="confirmRestoreScript(false)">Laden</button>
 			</div>
 		</div>
 	</div>
@@ -1252,8 +1271,10 @@
 			document.getElementById('rmScriptPath').textContent = s.path;
 			document.getElementById('rmScriptType').textContent = s.type;
 			document.getElementById('rmSuffix').value = '_rcvr';
+			document.getElementById('rmSuffix').disabled = false;
 			document.getElementById('rmMsg').textContent = '';
 			document.getElementById('rmMsg').style.color = '';
+			document.getElementById('rmWarning').style.display = 'none';
 			document.getElementById('rmConfirmBtn').disabled = false;
 			updateRestorePreview();
 			document.getElementById('restoreModalOverlay').classList.add('open');
@@ -1262,6 +1283,8 @@
 
 		function closeRestoreModal(e) {
 			if (e && e.target !== document.getElementById('restoreModalOverlay')) return;
+			document.getElementById('rmWarning').style.display = 'none';
+			document.getElementById('rmSuffix').disabled = false;
 			document.getElementById('restoreModalOverlay').classList.remove('open');
 		}
 
@@ -1274,29 +1297,48 @@
 			document.getElementById('rmPreview').textContent = '→ script.js.' + parts.join('.');
 		}
 
-		function confirmRestoreScript() {
+		function confirmRestoreScript(overwrite) {
 			if (cur.index < 0) return;
 			const s = scriptsData[cur.index];
-			const suffix = document.getElementById('rmSuffix').value.trim() || '_rcvr';
+			const suffix = document.getElementById('rmSuffix').value.trim();
 			const msgEl = document.getElementById('rmMsg');
 			const confirmBtn = document.getElementById('rmConfirmBtn');
 			msgEl.style.color = '#aaa';
 			msgEl.textContent = '⏳ Laden...';
 			confirmBtn.disabled = true;
-			sendTo('restoreScript', { path: s.path, name: s.name, type: s.type, source: s.source, suffix }, function(result) {
-				confirmBtn.disabled = false;
-				if (result && result.error) {
+			sendTo('restoreScript', { path: s.path, name: s.name, type: s.type, source: s.source, suffix, overwrite: !!overwrite }, function(result) {
+				if (result && result.exists) {
+					document.getElementById('rmWarningPath').textContent = result.id.replace(/^script\.js\./, '');
+					document.getElementById('rmWarning').style.display = 'block';
+					document.getElementById('rmSuffix').disabled = true;
+					msgEl.textContent = '';
+				} else if (result && result.error) {
+					confirmBtn.disabled = false;
 					msgEl.style.color = '#dc3545';
 					msgEl.textContent = '✗ ' + result.error;
 				} else if (result && result.success) {
 					msgEl.style.color = '#198754';
 					msgEl.textContent = '✓ Geladen!';
-					setTimeout(() => document.getElementById('restoreModalOverlay').classList.remove('open'), 1200);
+					setTimeout(() => closeRestoreModal(), 1200);
 				} else {
+					confirmBtn.disabled = false;
 					msgEl.style.color = '#dc3545';
 					msgEl.textContent = '✗ Unbekannter Fehler';
 				}
 			});
+		}
+
+		function dismissWarning() {
+			document.getElementById('rmWarning').style.display = 'none';
+			document.getElementById('rmSuffix').disabled = false;
+			document.getElementById('rmConfirmBtn').disabled = false;
+			document.getElementById('rmMsg').textContent = '';
+		}
+
+		function overwriteConfirmed() {
+			document.getElementById('rmWarning').style.display = 'none';
+			document.getElementById('rmSuffix').disabled = false;
+			confirmRestoreScript(true);
 		}
 	</script>
 </body>

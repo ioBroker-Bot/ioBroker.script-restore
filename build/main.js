@@ -686,8 +686,9 @@ class ScriptRestore extends utils.Adapter {
   }
   // ─── Restore to ioBroker ─────────────────────────────────────────────────
   async handleRestoreScript(obj) {
+    var _a;
     const msg = obj.message;
-    const suffix = msg.suffix || "_rcvr";
+    const suffix = (_a = msg.suffix) != null ? _a : "";
     const parts = msg.path.split(".");
     parts[parts.length - 1] = parts[parts.length - 1] + suffix;
     const newScriptPath = parts.join(".");
@@ -699,8 +700,8 @@ class ScriptRestore extends utils.Adapter {
     } catch {
       existing = null;
     }
-    if (existing) {
-      this.sendTo(obj.from, obj.command, { error: `Skript existiert bereits: ${newId}` }, obj.callback);
+    if (existing && !msg.overwrite) {
+      this.sendTo(obj.from, obj.command, { exists: true, id: newId }, obj.callback);
       return;
     }
     const engineTypeMap = {
