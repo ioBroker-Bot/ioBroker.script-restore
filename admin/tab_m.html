@@ -424,7 +424,7 @@
 			</div>
 			<div class="restore-modal-footer">
 				<span id="rmMsg" style="flex:1;font-size:0.85rem;align-self:center;"></span>
-				<button class="btn btn-outline" onclick="closeRestoreModal()">Schließen</button>
+				<button class="btn btn-outline" onclick="closeRestoreModal()" data-i18n="modalCancel">Schließen</button>
 				<button class="btn btn-outline-success" id="rmConfirmBtn" onclick="confirmRestoreScript(false)" data-i18n="modalLoad">Laden</button>
 			</div>
 		</div>
@@ -563,6 +563,19 @@
 				welcomeText:       'Lade ein Backup hoch oder wähle eine lokale Datei,<br>um Skripte anzuzeigen und wiederherzustellen.',
 				noSocket:          'Kein Socket. Bitte prüfen ob script-restore.{i} läuft.',
 				timeout:           'Timeout: Adapter antwortet nicht. Läuft script-restore.{i}?',
+
+				modalCancel:         'Schließen',
+				loadingFiles:         '⏳ Lade Dateiliste...',
+				scriptsLoaded:         '{n} Skripte geladen aus: {f}',
+				scriptsLoadedUrl:         '{n} Skripte geladen von URL',
+				noScripts:         'Keine Skripte gefunden.',
+				noScriptsBackup:         'Keine Skripte in diesem Backup gefunden.',
+				noArchiveFile:         'Keine passende Datei im Archiv gefunden.',
+				errorParsing:         'Fehler beim Parsen: ',
+				errorReading:         'Fehler beim Lesen der Datei.',
+				errorPrefix:         'Fehler: ',
+				adapterTimeout:         'Fehler: Keine Antwort vom Adapter. Läuft script-restore.{i}?',
+				codeHint:              '// Skript im Baum links auswählen… oder mehrere mit Strg+Klick für ZIP',
 			},
 			en: {
 				loaderLoading:     'Loading backup...',
@@ -606,6 +619,19 @@
 				welcomeText:       'Upload a backup or select a local file,<br>to view and restore scripts.',
 				noSocket:          'No socket. Please check if script-restore.{i} is running.',
 				timeout:           'Timeout: Adapter not responding. Is script-restore.{i} running?',
+
+				modalCancel:         'Close',
+				loadingFiles:         '⏳ Loading file list...',
+				scriptsLoaded:         '{n} scripts loaded from: {f}',
+				scriptsLoadedUrl:         '{n} scripts loaded from URL',
+				noScripts:         'No scripts found.',
+				noScriptsBackup:         'No scripts found in this backup.',
+				noArchiveFile:         'No matching file found in archive.',
+				errorParsing:         'Error parsing: ',
+				errorReading:         'Error reading file.',
+				errorPrefix:         'Error: ',
+				adapterTimeout:         'Error: No response from adapter. Is script-restore.{i} running?',
+				codeHint:              '// Select a script in the tree… or Ctrl+click multiple for ZIP',
 			},
 			fr: {
 				loaderLoading:     'Chargement de la sauvegarde...',
@@ -649,6 +675,19 @@
 				welcomeText:       'Téléversez une sauvegarde ou sélectionnez un fichier local,<br>pour afficher et restaurer des scripts.',
 				noSocket:          'Pas de socket. Vérifiez si script-restore.{i} est en cours d\'exécution.',
 				timeout:           'Délai d\'attente : l\'adaptateur ne répond pas. script-restore.{i} est-il en cours d\'exécution ?',
+
+				modalCancel:         'Fermer',
+				loadingFiles:         '⏳ Chargement de la liste...',
+				scriptsLoaded:         '{n} scripts chargés depuis : {f}',
+				scriptsLoadedUrl:         '{n} scripts chargés depuis URL',
+				noScripts:         'Aucun script trouvé.',
+				noScriptsBackup:         'Aucun script trouvé dans cette sauvegarde.',
+				noArchiveFile:         'Aucun fichier correspondant trouvé dans l\'archive.',
+				errorParsing:         'Erreur d\'analyse : ',
+				errorReading:         'Erreur de lecture du fichier.',
+				errorPrefix:         'Erreur : ',
+				adapterTimeout:         'Erreur : pas de réponse de l\'adaptateur. script-restore.{i} est-il actif ?',
+				codeHint:              '// Sélectionnez un script dans l\'arborescence… ou Ctrl+clic pour plusieurs en ZIP',
 			},
 			es: {
 				loaderLoading:     'Cargando copia de seguridad...',
@@ -692,6 +731,19 @@
 				welcomeText:       'Sube una copia de seguridad o selecciona un archivo local,<br>para ver y restaurar scripts.',
 				noSocket:          'Sin socket. Compruebe si script-restore.{i} está en ejecución.',
 				timeout:           'Tiempo de espera agotado: el adaptador no responde. ¿Está script-restore.{i} en ejecución?',
+
+				modalCancel:         'Cerrar',
+				loadingFiles:         '⏳ Cargando lista de archivos...',
+				scriptsLoaded:         '{n} scripts cargados desde: {f}',
+				scriptsLoadedUrl:         '{n} scripts cargados desde URL',
+				noScripts:         'No se encontraron scripts.',
+				noScriptsBackup:         'No se encontraron scripts en este backup.',
+				noArchiveFile:         'No se encontró archivo compatible en el archivo.',
+				errorParsing:         'Error al analizar: ',
+				errorReading:         'Error al leer el archivo.',
+				errorPrefix:         'Error: ',
+				adapterTimeout:         'Error: sin respuesta del adaptador. ¿Está en ejecución script-restore.{i}?',
+				codeHint:              '// Selecciona un script en el árbol… o Ctrl+clic para varios en ZIP',
 			},
 			it: {
 				loaderLoading:     'Caricamento backup...',
@@ -735,6 +787,19 @@
 				welcomeText:       'Carica un backup o seleziona un file locale,<br>per visualizzare e ripristinare gli script.',
 				noSocket:          'Nessun socket. Verificare se script-restore.{i} è in esecuzione.',
 				timeout:           'Timeout: l\'adattatore non risponde. script-restore.{i} è in esecuzione?',
+
+				modalCancel:         'Chiudi',
+				loadingFiles:         '⏳ Caricamento lista file...',
+				scriptsLoaded:         '{n} script caricati da: {f}',
+				scriptsLoadedUrl:         '{n} script caricati da URL',
+				noScripts:         'Nessuno script trovato.',
+				noScriptsBackup:         'Nessuno script trovato in questo backup.',
+				noArchiveFile:         'Nessun file corrispondente trovato nell\'archivio.',
+				errorParsing:         'Errore di analisi: ',
+				errorReading:         'Errore nella lettura del file.',
+				errorPrefix:         'Errore: ',
+				adapterTimeout:         'Errore: nessuna risposta dall\'adattatore. script-restore.{i} è in esecuzione?',
+				codeHint:              '// Seleziona uno script nell\'albero… o Ctrl+clic per più script in ZIP',
 			},
 			nl: {
 				loaderLoading:     'Back-up laden...',
@@ -778,6 +843,19 @@
 				welcomeText:       'Upload een back-up of selecteer een lokaal bestand,<br>om scripts te bekijken en te herstellen.',
 				noSocket:          'Geen socket. Controleer of script-restore.{i} actief is.',
 				timeout:           'Time-out: adapter reageert niet. Is script-restore.{i} actief?',
+
+				modalCancel:         'Sluiten',
+				loadingFiles:         '⏳ Bestandslijst laden...',
+				scriptsLoaded:         '{n} scripts geladen uit: {f}',
+				scriptsLoadedUrl:         '{n} scripts geladen van URL',
+				noScripts:         'Geen scripts gevonden.',
+				noScriptsBackup:         'Geen scripts gevonden in deze backup.',
+				noArchiveFile:         'Geen overeenkomend bestand gevonden in het archief.',
+				errorParsing:         'Fout bij verwerken: ',
+				errorReading:         'Fout bij lezen van bestand.',
+				errorPrefix:         'Fout: ',
+				adapterTimeout:         'Fout: geen reactie van adapter. Is script-restore.{i} actief?',
+				codeHint:              '// Selecteer een script in de boom… of Ctrl+klik voor meerdere als ZIP',
 			},
 			pl: {
 				loaderLoading:     'Wczytywanie kopii zapasowej...',
@@ -821,6 +899,19 @@
 				welcomeText:       'Prześlij kopię zapasową lub wybierz plik lokalny,<br>aby wyświetlić i przywrócić skrypty.',
 				noSocket:          'Brak gniazda. Sprawdź, czy script-restore.{i} działa.',
 				timeout:           'Przekroczono czas: adapter nie odpowiada. Czy script-restore.{i} działa?',
+
+				modalCancel:         'Zamknij',
+				loadingFiles:         '⏳ Ładowanie listy plików...',
+				scriptsLoaded:         '{n} skryptów załadowanych z: {f}',
+				scriptsLoadedUrl:         '{n} skryptów załadowanych z URL',
+				noScripts:         'Nie znaleziono skryptów.',
+				noScriptsBackup:         'Nie znaleziono skryptów w tej kopii zapasowej.',
+				noArchiveFile:         'Nie znaleziono pasującego pliku w archiwum.',
+				errorParsing:         'Błąd analizy: ',
+				errorReading:         'Błąd odczytu pliku.',
+				errorPrefix:         'Błąd: ',
+				adapterTimeout:         'Błąd: brak odpowiedzi adaptera. Czy script-restore.{i} działa?',
+				codeHint:              '// Wybierz skrypt w drzewie… lub Ctrl+klik dla wielu jako ZIP',
 			},
 			pt: {
 				loaderLoading:     'A carregar cópia de segurança...',
@@ -864,6 +955,19 @@
 				welcomeText:       'Carregue uma cópia de segurança ou selecione um ficheiro local,<br>para ver e restaurar scripts.',
 				noSocket:          'Sem socket. Verifique se script-restore.{i} está em execução.',
 				timeout:           'Tempo esgotado: o adaptador não responde. O script-restore.{i} está em execução?',
+
+				modalCancel:         'Fechar',
+				loadingFiles:         '⏳ A carregar lista de ficheiros...',
+				scriptsLoaded:         '{n} scripts carregados de: {f}',
+				scriptsLoadedUrl:         '{n} scripts carregados de URL',
+				noScripts:         'Nenhum script encontrado.',
+				noScriptsBackup:         'Nenhum script encontrado neste backup.',
+				noArchiveFile:         'Nenhum ficheiro correspondente encontrado no arquivo.',
+				errorParsing:         'Erro ao analisar: ',
+				errorReading:         'Erro ao ler ficheiro.',
+				errorPrefix:         'Erro: ',
+				adapterTimeout:         'Erro: sem resposta do adaptador. O script-restore.{i} está em execução?',
+				codeHint:              '// Selecione um script na árvore… ou Ctrl+clique para vários em ZIP',
 			},
 			ru: {
 				loaderLoading:     'Загрузка резервной копии...',
@@ -907,6 +1011,19 @@
 				welcomeText:       'Загрузите резервную копию или выберите локальный файл,<br>чтобы просмотреть и восстановить скрипты.',
 				noSocket:          'Нет сокета. Проверьте, запущен ли script-restore.{i}.',
 				timeout:           'Таймаут: адаптер не отвечает. Запущен ли script-restore.{i}?',
+
+				modalCancel:         'Закрыть',
+				loadingFiles:         '⏳ Загрузка списка файлов...',
+				scriptsLoaded:         '{n} скриптов загружено из: {f}',
+				scriptsLoadedUrl:         '{n} скриптов загружено по URL',
+				noScripts:         'Скрипты не найдены.',
+				noScriptsBackup:         'Скрипты в этой резервной копии не найдены.',
+				noArchiveFile:         'Подходящий файл в архиве не найден.',
+				errorParsing:         'Ошибка разбора: ',
+				errorReading:         'Ошибка чтения файла.',
+				errorPrefix:         'Ошибка: ',
+				adapterTimeout:         'Ошибка: адаптер не отвечает. Запущен ли script-restore.{i}?',
+				codeHint:              '// Выберите скрипт в дереве… или Ctrl+клик для нескольких в ZIP',
 			},
 			uk: {
 				loaderLoading:     'Завантаження резервної копії...',
@@ -950,6 +1067,19 @@
 				welcomeText:       'Завантажте резервну копію або оберіть локальний файл,<br>щоб переглянути та відновити скрипти.',
 				noSocket:          'Немає сокета. Перевірте, чи запущено script-restore.{i}.',
 				timeout:           'Час очікування вичерпано: адаптер не відповідає. Чи запущено script-restore.{i}?',
+
+				modalCancel:         'Закрити',
+				loadingFiles:         '⏳ Завантаження списку файлів...',
+				scriptsLoaded:         '{n} скриптів завантажено з: {f}',
+				scriptsLoadedUrl:         '{n} скриптів завантажено за URL',
+				noScripts:         'Скрипти не знайдено.',
+				noScriptsBackup:         'Скрипти у цій резервній копії не знайдено.',
+				noArchiveFile:         'Відповідний файл в архіві не знайдено.',
+				errorParsing:         'Помилка розбору: ',
+				errorReading:         'Помилка читання файлу.',
+				errorPrefix:         'Помилка: ',
+				adapterTimeout:         'Помилка: адаптер не відповідає. Чи запущено script-restore.{i}?',
+				codeHint:              '// Оберіть скрипт у дереві… або Ctrl+клік для кількох у ZIP',
 			},
 			'zh-cn': {
 				loaderLoading:     '正在加载备份...',
@@ -993,6 +1123,19 @@
 				welcomeText:       '上传备份或选择本地文件，<br>以查看和恢复脚本。',
 				noSocket:          '无套接字。请检查 script-restore.{i} 是否正在运行。',
 				timeout:           '超时：适配器无响应。script-restore.{i} 是否正在运行？',
+
+				modalCancel:         '关闭',
+				loadingFiles:         '⏳ 正在加载文件列表...',
+				scriptsLoaded:         '已从 {f} 加载 {n} 个脚本',
+				scriptsLoadedUrl:         '已从URL加载 {n} 个脚本',
+				noScripts:         '未找到脚本。',
+				noScriptsBackup:         '此备份中未找到脚本。',
+				noArchiveFile:         '在存档中未找到匹配的文件。',
+				errorParsing:         '解析错误：',
+				errorReading:         '读取文件时出错。',
+				errorPrefix:         '错误：',
+				adapterTimeout:         '错误：适配器无响应。script-restore.{i} 是否正在运行？',
+				codeHint:              '// 在左侧树中选择脚本…或按住 Ctrl 点击多个以下载 ZIP',
 			},
 		};
 
@@ -1373,7 +1516,7 @@
 				const entry = entries.find(e => e.name === target || e.name.endsWith('/' + target));
 				if (entry) return parseJsonContent(dec.decode(entry.content), target);
 			}
-			throw new Error('Keine passende Datei im Archiv gefunden (objects.json, objects.jsonl, scripts.json)');
+			throw new Error(t('noArchiveFile'));
 		}
 
 		// === File Upload ===
@@ -1394,13 +1537,13 @@
 						const scripts = parseJsonContent(reader.result, file.name);
 						hideLoader();
 						loadScripts(scripts);
-						setStatus(scripts.length + ' Skripte geladen aus: ' + file.name, 'success');
+						setStatus(t('scriptsLoaded').replace('{n}', scripts.length).replace('{f}', file.name), 'success');
 					} catch(e) {
 						hideLoader();
-						setStatus('Fehler beim Parsen: ' + e.message, 'error');
+						setStatus(t('errorParsing') + e.message, 'error');
 					}
 				};
-				reader.onerror = () => { hideLoader(); setStatus('Fehler beim Lesen der Datei.', 'error'); };
+				reader.onerror = () => { hideLoader(); setStatus(t('errorReading'), 'error'); };
 				reader.readAsText(file, 'utf-8');
 				this.value = '';
 				return;
@@ -1417,15 +1560,15 @@
 					const scripts = await parseArchiveInBrowser(archiveReader.result, file.name); // result is ArrayBuffer
 					hideLoader();
 					loadScripts(scripts);
-					setStatus(scripts.length + ' Skripte geladen aus: ' + file.name, 'success');
+					setStatus(t('scriptsLoaded').replace('{n}', scripts.length).replace('{f}', file.name), 'success');
 				} catch(e) {
 					hideLoader();
-					setStatus('Fehler: ' + e.message, 'error');
+					setStatus(t('errorPrefix') + e.message, 'error');
 				}
 			};
 			archiveReader.onerror = function() {
 				hideLoader();
-				setStatus('Fehler beim Lesen der Datei.', 'error');
+				setStatus(t('errorReading'), 'error');
 			};
 			archiveReader.readAsArrayBuffer(file);
 			this.value = '';
@@ -1476,7 +1619,7 @@
 			dropdownState[src] = !isOpen;
 			if (dropdownState[src]) {
 				menu.classList.add('open');
-				menu.innerHTML = '<div class="dropdown-loading">⏳ Lade Dateiliste...</div>';
+				menu.innerHTML = '<div class="dropdown-loading">' + t('loadingFiles') + '</div>';
 				sendTo(cfg.listCmd, {}, function(result) {
 					if (result && result.error) {
 						menu.innerHTML = '<div class="dropdown-empty">⚠️ ' + escapeHTML(result.error) + '</div>';
@@ -1520,12 +1663,12 @@
 			sendTo(cfg.parseCmd, { filename: filename }, function(result) {
 				hideLoader();
 				if (result && result.error) {
-					setStatus('Fehler: ' + result.error, 'error');
+					setStatus(t('errorPrefix') + result.error, 'error');
 				} else if (result && result.scripts) {
 					loadScripts(result.scripts);
-					setStatus(result.scripts.length + ' Skripte geladen aus: ' + filename, 'success');
+					setStatus(t('scriptsLoaded').replace('{n}', result.scripts.length).replace('{f}', filename), 'success');
 				} else {
-					setStatus('Keine Skripte gefunden.', 'error');
+					setStatus(t('noScripts'), 'error');
 				}
 			});
 		}
@@ -1539,15 +1682,15 @@
 			sendTo('parseHttpUrl', { url }, function(result) {
 				hideLoader();
 				if (!result) {
-					setStatus('Fehler: Keine Antwort vom Adapter. Läuft script-restore.' + instance + '?', 'error');
+					setStatus(t('adapterTimeout').replace('{i}', instance), 'error');
 				} else if (result.error) {
-					setStatus('Fehler: ' + result.error, 'error');
-					alert('Fehler beim Laden: ' + result.error);
+					setStatus(t('errorPrefix') + result.error, 'error');
+					alert(t('errorPrefix') + result.error);
 				} else if (result.scripts) {
 					loadScripts(result.scripts);
-					setStatus(result.scripts.length + ' Skripte geladen von URL', 'success');
+					setStatus(t('scriptsLoadedUrl').replace('{n}', result.scripts.length), 'success');
 				} else {
-					setStatus('Keine Skripte gefunden.', 'error');
+					setStatus(t('noScripts'), 'error');
 				}
 			});
 		}
@@ -1594,8 +1737,8 @@
 			document.getElementById('actionBar').style.display = 'none';
 			document.getElementById('codeContainer').className = 'code-empty';
 			document.getElementById('codeContainer').innerHTML = scripts.length > 0
-				? '// Skript im Baum links auswählen… oder mehrere mit Strg+Klick für ZIP'
-				: '<span style="color:#dc3545">Keine Skripte in diesem Backup gefunden.</span>';
+				? t('codeHint')
+				: '<span style="color:#dc3545">' + t('noScriptsBackup') + '</span>';
 		}
 
 		// === Loader ===
