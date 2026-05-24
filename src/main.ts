@@ -31,6 +31,8 @@ interface ScriptEntry {
 }
 
 class ScriptRestore extends utils.Adapter {
+	private _systemLanguage = "en";
+
 	public constructor(options: Partial<utils.AdapterOptions> = {}) {
 		super({
 			...options,
@@ -41,8 +43,17 @@ class ScriptRestore extends utils.Adapter {
 		this.on("unload", this.onUnload.bind(this));
 	}
 
-	private onReady(): void {
+	private async onReady(): Promise<void> {
 		this.log.info(`Script Restore ready. Backup path: ${this.config.backupPath || "/opt/iobroker/backups"}`);
+		try {
+			const sysCfg = await this.getForeignObjectAsync("system.config");
+			const lang = (sysCfg?.common as unknown as Record<string, unknown>)?.language;
+			if (typeof lang === "string" && lang) {
+				this._systemLanguage = lang;
+			}
+		} catch {
+			// keep default 'en'
+		}
 	}
 
 	private onUnload(callback: () => void): void {
@@ -65,17 +76,7 @@ class ScriptRestore extends utils.Adapter {
 				case "parseUploadedFile":
 					await this.handleParseUploadedFile(obj);
 					break;
-				case "getSourceConfig": {
-					let language = "en";
-					try {
-						const sysCfg = await this.getForeignObjectAsync("system.config");
-						const lang = (sysCfg?.common as unknown as Record<string, unknown>)?.language;
-						if (typeof lang === "string" && lang) {
-							language = lang;
-						}
-					} catch {
-						// ignore
-					}
+				case "getSourceConfig":
 					this.sendTo(
 						obj.from,
 						obj.command,
@@ -86,12 +87,11 @@ class ScriptRestore extends utils.Adapter {
 							httpEnabled: !!this.config.httpEnabled,
 							sftpEnabled: !!this.config.sftpEnabled,
 							webdavEnabled: !!this.config.webdavEnabled,
-							language,
+							language: this._systemLanguage,
 						},
 						obj.callback,
 					);
 					break;
-				}
 				case "suggestBackupPath":
 					await this.handleSuggestBackupPath(obj);
 					break;
