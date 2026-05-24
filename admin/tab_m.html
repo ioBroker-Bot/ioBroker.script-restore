@@ -1000,14 +1000,19 @@
 			// 1. URL parameter
 			const lp = urlParams.get('lang') || urlParams.get('language');
 			if (lp) return normLang(lp);
-			// 2. localStorage (verschiedene Admin-Versionen)
+			// 2. <html lang="de"> des Parent-Frames (ioBroker Admin setzt das zuverlässig)
+			try {
+				const hl = window.parent.document.documentElement.lang;
+				if (hl && hl.length >= 2) return normLang(hl);
+			} catch(e) {}
+			// 3. localStorage (verschiedene Admin-Versionen)
 			try {
 				for (const k of ['App.language', 'ioBroker.locale', 'lang', 'language']) {
 					const v = localStorage.getItem(k);
 					if (v && v.length >= 2) return normLang(v);
 				}
 			} catch(e) {}
-			// 3. Parent frame (Admin v5/v6/v7)
+			// 4. Parent frame Variablen (Admin v5/v6/v7)
 			try {
 				const p = window.parent;
 				if (p.sysLang) return normLang(p.sysLang);
@@ -1015,7 +1020,7 @@
 				if (p.main && p.main.language) return normLang(p.main.language);
 				if (p.app && p.app.language) return normLang(p.app.language);
 			} catch(e) {}
-			// 4. Browser-Sprache
+			// 5. Browser-Sprache
 			return normLang(navigator.language || 'en');
 		}
 
