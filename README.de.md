@@ -77,6 +77,11 @@ Das Archiv wird vollständig im Browser geparst — beim Durchsuchen werden kein
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### 0.1.4 (2026-05-24)
+* (ipod86) Syntaxhervorhebung für JS/TS, Blockly (XML) und Rules (JSON) — reines JS, keine externe Bibliothek
+* (ipod86) Spracherkennung korrigiert: ioBroker-Systemsprache wird über den Adapter (system.config) gelesen statt über Browser/DOM
+* (ipod86) Alle verbleibenden Loader-Texte übersetzt (Datei/Archiv lesen, Entpacken, URL laden)
+
 ### 0.1.3 (2026-05-24)
 * (ipod86) Language-Flash behoben: Socket-Override wird übersprungen wenn Sprache bereits vom Admin-Frame erkannt wurde
 * (ipod86) Alle hardcodierten Statusmeldungen durch übersetzte t()-Aufrufe ersetzt

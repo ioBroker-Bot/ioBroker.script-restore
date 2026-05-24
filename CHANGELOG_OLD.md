@@ -2,6 +2,10 @@
 
 ### 0.0.1 (2026-04-06)
 * (ipod86) initial release
+## 0.0.12 (2026-04-30)
+* (ipod86) add common.singleton to prevent multiple instances
+* (ipod86) complete i18n translations for all supported languages (fr, es, it, nl, pl, pt, ru, uk, zh-cn)
+
 ## 0.0.11 (2026-04-13)
 * (ipod86) add type filter (JS/TS/Blockly/Rules) in script sidebar
 * (ipod86) add direct restore into ioBroker with suffix input and confirm modal

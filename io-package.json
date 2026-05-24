@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "script-restore",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "news": {
+      "0.1.4": {
+        "en": "add syntax highlighting for JS/TS, Blockly (XML) and Rules (JSON) — pure JS, no external deps\nfix language detection: read ioBroker system language via adapter (system.config) instead of browser/DOM\ntranslate all remaining loader texts (reading file/archive, extracting, loading URL)",
+        "de": "syntax-Highlighting für JS/TS, Blockly (XML) und Rules (JSON) hinzufügen — pure JS, keine externen Deps\nspracherkennung fix: ioBroker Systemsprache über Adapter (system.config) anstelle von Browser/DOM lesen\nalle übrigen Loadertexte übersetzen (Datei/Archiv lesen, extrahieren, URL laden)",
+        "ru": "добавить подсветку синтаксиса для JS/TS, Blockly (XML) и Rules (JSON) — чистый JS, без внешних депсов\nисправить обнаружение языка: читать язык системы ioBroker через адаптер (system.config) вместо браузера/DOM\nперевод всех оставшихся текстов загрузчика (чтение файла / архива, извлечение, загрузка URL)",
+        "pt": "adicionar realce de sintaxe para JS/TS, Blockly (XML) e Rules (JSON) — puro JS, sem deps externos\ndetecção de linguagem de correção: ler ioBroker linguagem do sistema via adaptador (system.config) em vez de navegador / DOM\ntraduzir todos os textos restantes do carregador (lendo arquivo/arquivo, extraindo, carregando URL)",
+        "nl": "syntaxismarkeringen toevoegen voor JS/TS, Blockly (XML) en Rules (JSON)\nfix taaldetectie: lees ioBroker systeemtaal via adapter (system.config) in plaats van browser/DOM\nalle overgebleven laderteksten vertalen (bestand/archief lezen, uitpakken, laden van URL)",
+        "fr": "ajouter la mise en surbrillance syntaxique pour JS/TS, Blockly (XML) et Rules (JSON) — JS pur, pas de deps externes\ncorrection de la détection du langage: lire ioBroker langage système via adaptateur (system.config) au lieu de navigateur/DOM\ntraduire tous les textes restants du chargeur (lecture de fichier/archive, extraction, chargement d'URL)",
+        "it": "aggiungere l'evidenziazione della sintassi per JS/TS, Blockly (XML) e Regole (JSON) — JS puro, nessun deps esterno\nfix language detection: read ioBroker system language via adapter (system.config) anziché browser/DOM\ntradurre tutti i restanti testi di carica (lettura file/archive, estrazione, caricamento URL)",
+        "es": "añadir syntax highlighting for JS/TS, Blockly (XML) and Rules (JSON) — pure JS, no external deps\ndetección del lenguaje de fijación: leer el lenguaje del sistema ioBroker a través del adaptador (system.config) en lugar del navegador/DOM\ntraducir todos los textos de carga restantes (leer archivo/archive, extraer, cargar URL)",
+        "pl": "dodaj podświetlanie składni dla JS / TS, Blockly (XML) i Rules (JSON) - czysty JS, brak zewnętrznych deb\nwykrywanie języka: czytaj jOBroker system language poprzez adapter (system.config) zamiast przeglądarki / DOM\nprzetłumaczyć wszystkie pozostałe teksty ładowarki (czytanie pliku / archiwum, pobieranie, wczytywanie URL)",
+        "uk": "додати синтаксис виділення для JS / T, Blockly (XML) і Правил (JSON) — чистий JS, не зовнішній депс\nenglish languageEspañol idioma中文 语言Русский языкУкраїнська моваPortuguese idioma\nперевести всі інші тексти навантажувача (читати файл/архів, вилучення, завантаження URL)",
+        "zh-cn": "增加JS/TS、Blockly(XML)和Rules(JSON)的语法重点——纯JS,没有外部解析\n固定语言检测:通过适配器(system.config)读取ioBroker系统语言,而不是浏览器/DOM\n翻译所有剩余的加载器文本(读取文件/存档、提取、加载 URL)"
+      },
       "0.1.3": {
         "en": "fix language flash: skip socket override when language already detected from admin frame\nreplace all hardcoded status strings with translated t() calls\nadd codeHint translation key in all 11 languages",
         "de": "fixer sprachblitz: überschreiben der sprachfassung, wenn die sprache bereits von admin-rahmen erkannt wurde\nalle hardcoded status strings durch übersetzte t()-anrufe ersetzen\ncode hinzufügenHint Übersetzungsschlüssel in allen 11 Sprachen",
@@ -80,19 +93,6 @@
         "pl": "dodaj filtr typu (JS / TS / Blockly / Rules) w pasku bocznym skryptu\ndodaj bezpośrednie przywracanie do joBrokera z wejściem przyrostowym i potwierdź modal\nusunąć przestarzałe admin / words.js i .prettierignore",
         "uk": "додати фільтр типу (JS/TS/Blockly/Rules) в бічній панелі скриптів\nдодати прямий відновлення в ioBroker з входом Suffix і підтвердити модаль\nвидалити obsolete admin/words.js і .prettierignore",
         "zh-cn": "在脚本边栏中添加类型过滤器( JS/ TS/ Blockly/ Rules)\n在 ioBroker 中添加带有后缀输入的直接还原并确认模式\n删除过时的管理员/名词.js和. pretierignore"
-      },
-      "0.0.10": {
-        "en": "Fix jsonConfig responsive sizes (E5509); trim news to 7 entries; add Dependabot cooldown",
-        "de": "jsonConfig Responsive-Größen korrigiert (E5509); News auf 7 Einträge reduziert; Dependabot-Cooldown ergänzt",
-        "ru": "Исправлены размеры jsonConfig; сокращены новости до 7; добавлен cooldown Dependabot",
-        "pt": "Corrigidos tamanhos responsivos jsonConfig; notícias reduzidas a 7; cooldown Dependabot adicionado",
-        "nl": "jsonConfig responsieve maten gecorrigeerd; nieuws beperkt tot 7; Dependabot cooldown toegevoegd",
-        "fr": "Correction tailles responsives jsonConfig; actualités réduites à 7; cooldown Dependabot ajouté",
-        "it": "Corrette dimensioni responsive jsonConfig; notizie ridotte a 7; aggiunto cooldown Dependabot",
-        "es": "Corregidos tamaños responsivos jsonConfig; noticias reducidas a 7; añadido cooldown Dependabot",
-        "pl": "Poprawiono rozmiary responsywne jsonConfig; aktualności ograniczone do 7; dodano cooldown Dependabot",
-        "uk": "Виправлено розміри jsonConfig; новини скорочено до 7; додано cooldown Dependabot",
-        "zh-cn": "修复 jsonConfig 响应式尺寸；新闻条目减少至 7 条；添加 Dependabot 冷却时间"
       }
     },
     "titleLang": {
