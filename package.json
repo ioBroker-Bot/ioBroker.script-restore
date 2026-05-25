@@ -22,7 +22,7 @@
     "url": "https://github.com/ipod86/ioBroker.script-restore.git"
   },
   "engines": {
-    "node": ">= 22"
+    "node": ">= 22.13.0"
   },
   "dependencies": {
     "@eslint/eslintrc": "^3.3.5",

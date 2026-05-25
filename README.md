@@ -99,6 +99,8 @@ The archive is parsed entirely in the browser — no files are written to disk d
 * (ipod86) add .npmrc with legacy-peer-deps to resolve peer dependency conflicts
 * (ipod86) update dependencies: webdav, basic-ftp, typescript, @types/node, @iobroker/eslint-config
 
+Older changelogs are available in [CHANGELOG_OLD.md](CHANGELOG_OLD.md).
+
 ## License
 MIT License
 
