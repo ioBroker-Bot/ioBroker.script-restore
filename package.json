@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "@iobroker/adapter-core": "^3.3.2",
-    "@iobroker/types": "^7.1.0",
     "@marsaud/smb2": "^0.18.0",
     "basic-ftp": "^6.0.1",
     "ssh2-sftp-client": "^12.1.1",
