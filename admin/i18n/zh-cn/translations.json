@@ -36,5 +36,10 @@
     "webdavPath": "路径",
     "webdavSection": "WebDAV",
     "webdavUrl": "服务器 URL",
-    "webdavUser": "用户"
+    "webdavUser": "用户",
+    "/opt/iobroker/backups": "/opt/iobroker/backups",
+    "anonymous": "anonymous",
+    "/backups": "/backups",
+    "Backups": "Backups",
+    "https://cloud.example.com/remote.php/webdav": "https://cloud.example.com/remote.php/webdav"
 }

@@ -36,5 +36,10 @@
     "webdavPath": "Путь",
     "webdavSection": "WebDAV",
     "webdavUrl": "URL сервера",
-    "webdavUser": "Пользователь"
+    "webdavUser": "Пользователь",
+    "/opt/iobroker/backups": "/opt/iobroker/backups",
+    "anonymous": "anonymous",
+    "/backups": "/backups",
+    "Backups": "Backups",
+    "https://cloud.example.com/remote.php/webdav": "https://cloud.example.com/remote.php/webdav"
 }
