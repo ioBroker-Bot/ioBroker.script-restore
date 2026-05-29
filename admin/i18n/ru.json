@@ -1,4 +1,8 @@
 {
+    "/backups": "/backups",
+    "/opt/iobroker/backups": "/opt/iobroker/backups",
+    "Backups": "Backups",
+    "anonymous": "anonymous",
     "backupPath": "Путь к резервным копиям",
     "ftpEnabled": "Включить FTP",
     "ftpHost": "Хост",
@@ -11,6 +15,7 @@
     "httpEnabled": "Включить источник HTTP/HTTPS",
     "httpInfo": "Введите прямой URL к файлу резервной копии .tar.gz на главной вкладке. Протокол (https://) добавляется автоматически, если не указан.",
     "httpSection": "HTTP/HTTPS",
+    "https://cloud.example.com/remote.php/webdav": "https://cloud.example.com/remote.php/webdav",
     "localEnabled": "Включить локальные резервные копии",
     "localSection": "Локальные резервные копии",
     "sftpEnabled": "Включить SFTP",
@@ -36,10 +41,5 @@
     "webdavPath": "Путь",
     "webdavSection": "WebDAV",
     "webdavUrl": "URL сервера",
-    "webdavUser": "Пользователь",
-    "/opt/iobroker/backups": "/opt/iobroker/backups",
-    "anonymous": "anonymous",
-    "/backups": "/backups",
-    "Backups": "Backups",
-    "https://cloud.example.com/remote.php/webdav": "https://cloud.example.com/remote.php/webdav"
+    "webdavUser": "Пользователь"
 }

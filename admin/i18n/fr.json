@@ -1,4 +1,8 @@
 {
+    "/backups": "/backups",
+    "/opt/iobroker/backups": "/opt/iobroker/backups",
+    "Backups": "Backups",
+    "anonymous": "anonymous",
     "backupPath": "Chemin de sauvegarde",
     "ftpEnabled": "Activer FTP",
     "ftpHost": "Hôte",
@@ -11,6 +15,7 @@
     "httpEnabled": "Activer la source HTTP/HTTPS",
     "httpInfo": "Entrez une URL directe vers un fichier de sauvegarde .tar.gz dans l'onglet principal. Le protocole (https://) est ajouté automatiquement si omis.",
     "httpSection": "HTTP/HTTPS",
+    "https://cloud.example.com/remote.php/webdav": "https://cloud.example.com/remote.php/webdav",
     "localEnabled": "Activer les sauvegardes locales",
     "localSection": "Sauvegardes locales",
     "sftpEnabled": "Activer SFTP",
@@ -36,10 +41,5 @@
     "webdavPath": "Chemin",
     "webdavSection": "WebDAV",
     "webdavUrl": "URL du serveur",
-    "webdavUser": "Utilisateur",
-    "/opt/iobroker/backups": "/opt/iobroker/backups",
-    "anonymous": "anonymous",
-    "/backups": "/backups",
-    "Backups": "Backups",
-    "https://cloud.example.com/remote.php/webdav": "https://cloud.example.com/remote.php/webdav"
+    "webdavUser": "Utilisateur"
 }

@@ -1,4 +1,8 @@
 {
+    "/backups": "/backups",
+    "/opt/iobroker/backups": "/opt/iobroker/backups",
+    "Backups": "Backups",
+    "anonymous": "anonymous",
     "backupPath": "备份路径",
     "ftpEnabled": "启用 FTP",
     "ftpHost": "主机",
@@ -11,6 +15,7 @@
     "httpEnabled": "启用 HTTP/HTTPS 来源",
     "httpInfo": "在主标签页中输入 .tar.gz 备份文件的直接 URL。如果省略协议 (https://)，将自动添加。",
     "httpSection": "HTTP/HTTPS",
+    "https://cloud.example.com/remote.php/webdav": "https://cloud.example.com/remote.php/webdav",
     "localEnabled": "启用本地备份",
     "localSection": "本地备份",
     "sftpEnabled": "启用 SFTP",
@@ -36,10 +41,5 @@
     "webdavPath": "路径",
     "webdavSection": "WebDAV",
     "webdavUrl": "服务器 URL",
-    "webdavUser": "用户",
-    "/opt/iobroker/backups": "/opt/iobroker/backups",
-    "anonymous": "anonymous",
-    "/backups": "/backups",
-    "Backups": "Backups",
-    "https://cloud.example.com/remote.php/webdav": "https://cloud.example.com/remote.php/webdav"
+    "webdavUser": "用户"
 }
