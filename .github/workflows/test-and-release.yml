@@ -60,39 +60,10 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - uses: ioBroker/testing-action-deploy@v1
         with:
           node-version: '24.x'
-          registry-url: 'https://registry.npmjs.org'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Extract version info
-        id: extract
-        run: |
-          VERSION="${GITHUB_REF##*/v}"
-          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
-          if [[ "$VERSION" == *"-"* ]]; then
-            echo "TAG=--tag next" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Publish to npm with provenance
-        run: |
-          npm install -g npm@latest
-          npm publish --provenance ${{ steps.extract.outputs.TAG }}
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          name: Release v${{ steps.extract.outputs.VERSION }}
-          draft: false
-          prerelease: ${{ contains(steps.extract.outputs.VERSION, '-') }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          install-command: 'npm install'
+          build: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
